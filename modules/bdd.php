@@ -1,9 +1,10 @@
 <?php
 
-$DB_DSN = 'mysql:host=localhost;dbname=hypertube;charset=utf8';
-$DB_USER = 'root';
-$DB_PASSWORD = '';
+$data = file('.env');
 
-$bdd = new PDO($DB_DSN , $DB_USER, $DB_PASSWORD);
+if (!isset($data[2]))
+	$data[2] = "";
+
+$bdd = new PDO(str_replace("\n", "", $data[0]), str_replace("\n", "", $data[1]), $data[2]);
 
 ?>
