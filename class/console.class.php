@@ -13,16 +13,20 @@ class console {
 
 		$this->get_infs_modules();
 		$this->init = file_get_contents('../dev_console/template/console_init.html');
+
 		if ($comm == "init") {
+
 			$this->html = file_get_contents('../dev_console/template/console.html');
 			$path = new link('dev_console/js/console.js');
 			$this->html = str_replace("{{link}}", $path->get_link(0), $this->html);
 			$this->res = "";
 		} else {
+
 			$this->html = "{{infos}}";
 			$single = explode(" ", $comm);
 			$this->res = "<pre style='margin-left: 0.5%; color: white;'>".$this->commande_exist($comm)."</pre>";
 		}
+
 		$this->replace_text($anc, $comm);
 		$this->aff();
 	}
@@ -41,6 +45,7 @@ class console {
 	}
 
 	private function aff() {
+		
 		echo $this->html;
 	}
 
