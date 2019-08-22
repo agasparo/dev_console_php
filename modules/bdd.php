@@ -1,6 +1,7 @@
 <?php
 
-$data = file('.env');
+$path = new link('dev_console/.env');
+$data = file($path->get_link(1));
 
 if (!isset($data[2]))
 	$data[2] = "";

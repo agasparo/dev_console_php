@@ -23,6 +23,8 @@ class console {
 		$this->init = file_get_contents('../dev_console/template/console_init.html');
 		if ($comm == "init") {
 			$this->html = file_get_contents('../dev_console/template/console.html');
+			$path = new link('dev_console/js/console.js');
+			$this->html = str_replace("{{link}}", $path->get_link(0), $this->html);
 			$this->res = "";
 		} else {
 			$this->html = "{{infos}}";
@@ -169,7 +171,8 @@ class console {
 	}
 
 	private function up_del($tab, $type) {
-		require '../dev_console/modules/bdd.php';
+		$path = new link('dev_console/modules/bdd.php');
+		require $path->get_link(1);
 		$req = "";
 		if ($type == "UPDATE") {
 			$req = $type;
@@ -211,7 +214,8 @@ class console {
 	}
 
 	private function search_infos($option, $table_bdd, $specific, $table_values) {
-		require '../dev_console/modules/bdd.php';
+		$path = new link('dev_console/modules/bdd.php');
+		require $path->get_link(1);
 		$req = $option.$table_bdd.$specific;
 		$exec_req = $bdd->prepare($req);
 		$exec_req->execute($table_values);
@@ -219,7 +223,8 @@ class console {
 	}
 
 	private function col($table_bdd, $t) {
-		require 'modules/bdd.php';
+		$path = new link('dev_console/modules/bdd.php');
+		require $path->get_link(1);
 		$e = $bdd->query('DESCRIBE '.$table_bdd);
 		$colum = $e->fetchAll();
 		$i = 0;

@@ -5,7 +5,8 @@ Class bdd_tab {
 	private $tb;
 
 	public function __Construct() {
-		require 'modules/bdd.php';
+		$path = new link('dev_console/modules/bdd.php');
+		require $path->get_link(1);
 		$this->tb = $bdd->query("SHOW TABLES");
 		$this->tb = $this->tb->fetchAll();
 	}
