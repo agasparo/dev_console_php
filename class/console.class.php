@@ -4,7 +4,7 @@ class console {
 
 	private $html;
 	private $res;
-	private $commandes = ["get", "clear", "add", "update", "show", "delete", "request", "list"];
+	private $commandes = ["get", "clear", "add", "update", "show", "delete", "request", "list", "set"];
 	private $get = [];
 	private $add;
 	private $update;
@@ -23,7 +23,11 @@ class console {
 			$this->res = "";
 		} else {
 			$this->html = "{{infos}}";
-			$this->res = "<pre style='margin-left: 0.5%;'>".$this->commande_exist($comm)."</pre>";
+			$single = explode(" ", $comm);
+			if ($single[0] != "set" || !isset($single[1]))
+				$this->res = "<pre style='margin-left: 0.5%;'>".$this->commande_exist($comm)."</pre>";
+			else
+				$this->commande_exist($comm); // finir ici
 		}
 		$this->replace_text($anc, $comm);
 		$this->aff();
@@ -80,6 +84,16 @@ class console {
 			return ($this->request_init($tab));
 		else if ($tab[0] == "list")
 			return ('--> '.implode("<br>--> ", $this->commandes));
+		else if ($tab[0] == "set")
+			return ($this->set_var($tab));
+	}
+
+	private function set_var($tab) {
+		if (isset($tab[1]) && isset($tab[2]) && isset($tab[3])) {
+			${$tab[2]} = $tab[3];
+			return (${$tab[2]});
+		}
+		return ('SET : [variable] = [valeure]');
 	}
 
 	private function request_init($tab) {
