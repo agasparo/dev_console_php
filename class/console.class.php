@@ -10,14 +10,16 @@ class console {
 	private $update;
 	private $delete;
 	private $var;
+	private $all_vars;
 	private $unautorized = ["password"];
 
-	public function __Construct($comm, $anc) {
+	public function __Construct($comm, $anc, $all_vars) {
 		$tabs_bdd = new bdd_tab();
 		$this->get = $tabs_bdd->get_tab();
 		$this->add = $tabs_bdd->get_tab();
 		$this->update = $tabs_bdd->get_tab();
 		$this->delete = $tabs_bdd->get_tab();
+		$this->all_vars = $all_vars;
 		$this->init = file_get_contents('template/console_init.html');
 		if ($comm == "init") {
 			$this->html = file_get_contents('template/console.html');
@@ -97,17 +99,13 @@ class console {
 	private function get_var($tab) {
 		if (isset($tab[1])) {
 			$tab[1] = str_replace("$", "", $tab[1]);
-			echo "<br>";
-			echo $tab[1];
-			echo "<br>";
-			echo "_SESSION";
-			echo ${$tab[1]};
-			if (isset(${$tab[1]})) {
-				if (is_array(${$tab[1]}))
-					return ('array');
-				return (${$tab[1]});
+			if (array_key_exists($tab[1], $this->all_vars)) {
+				if (is_array($this->all_vars[$tab[1]])) {
+					return ($this->show_var($tab[1], $this->all_vars[$tab[1]]));
+				}
+				return ($this->all_vars[$tab[1]]);
 			}
-			return ('ok');
+			return ("La variable ".$tab[1]." n exist pas");
 		}
 		return ('GET_VAR : [variable]');
 	}
@@ -135,6 +133,16 @@ class console {
 			return ($request->send_request());
 		}
 		return ("request [type] [url] ['name_variable:valeur_varibale']");
+	}
+
+	private function show_var($var, $tab) {
+		require_once 'Console/Table.php';
+		$tbl = new Console_Table();
+		$tbl->setHeaders(["Valeur de la key", "Valeur de la variable : ".$var]);
+		foreach ($tab as $key => $value) {
+			$tbl->addRow([$key, $value]);
+		}
+		return ($tbl->getTable());
 	}
 
 	private function show() {

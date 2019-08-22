@@ -13,7 +13,7 @@ $aff = "";
 if (isset($anc))
 	$aff = $anc;
 if (isset($commande)) {
-	$console = new console($commande, $aff);
+	$console = new console($commande, $aff, get_defined_vars());
 	$tab = $console->return_var();
 	if (is_array($tab)) {
 		$e = explode("[", key($tab));
@@ -27,5 +27,5 @@ if (isset($commande)) {
 			${$e[0]} = $tab[key($tab)];
 	}
 } else
-	$console = new console("init", $aff);
+	$console = new console("init", $aff, get_defined_vars());
 ?>
