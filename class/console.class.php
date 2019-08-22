@@ -9,6 +9,7 @@ class console {
 	private $add;
 	private $update;
 	private $delete;
+	private $var;
 	private $unautorized = ["id", "password"];
 
 	public function __Construct($comm, $anc) {
@@ -24,13 +25,16 @@ class console {
 		} else {
 			$this->html = "{{infos}}";
 			$single = explode(" ", $comm);
-			if ($single[0] != "set" || !isset($single[1]))
-				$this->res = "<pre style='margin-left: 0.5%;'>".$this->commande_exist($comm)."</pre>";
-			else
-				$this->commande_exist($comm); // finir ici
+			$this->res = "<pre style='margin-left: 0.5%;'>".$this->commande_exist($comm)."</pre>";
 		}
 		$this->replace_text($anc, $comm);
 		$this->aff();
+	}
+
+	public function return_var() {
+		if (!empty($this->var))
+			return ($this->var);
+		return ("none");
 	}
 
 	private function aff() {
@@ -90,8 +94,8 @@ class console {
 
 	private function set_var($tab) {
 		if (isset($tab[1]) && isset($tab[2]) && isset($tab[3])) {
-			${$tab[2]} = $tab[3];
-			return (${$tab[2]});
+			$this->var = array(str_replace("$", "", $tab[1]) => $tab[3]);
+			return ($tab[3]);
 		}
 		return ('SET : [variable] = [valeure]');
 	}
