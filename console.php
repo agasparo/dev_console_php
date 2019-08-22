@@ -26,7 +26,6 @@ if (isset($commande)) {
 		}
 		else
 			${$e[0]} = $tab[key($tab)];
-		header("Location:".$url);
 	}
 } else
 	$console = new console("init", $aff, get_defined_vars());
