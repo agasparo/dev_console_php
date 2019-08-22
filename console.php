@@ -16,6 +16,7 @@ if (isset($anc))
 	$aff = $anc;
 if (isset($commande)) {
 	$init = new init();
+	require 'require/to_include.php';
 	$console = new console($commande, $aff);
 	/*$tab = $console->return_var();
 	if (is_array($tab) && count($tab) >= 1) {
@@ -31,6 +32,7 @@ if (isset($commande)) {
 	}*/
 } else {
 	$init = new init();
+	require 'require/to_include.php';
 	$console = new console("init", $aff);
 }
 ?>

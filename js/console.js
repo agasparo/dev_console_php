@@ -5,7 +5,7 @@ function init() {
 	input_console.onkeydown = function(e) {
 		if (e.which == 13) {
 			e.preventDefault();
-			$.post('http://192.168.99.100.xip.io:41062/www/dev_console/console.php', {commande:input_console.value}, function(data) { // chnager url ici
+			$.post('http://localhost:8080/dev_console/console.php', {commande:input_console.value}, function(data) { // chnager url ici
 				input_console.remove();
 				let text = '>><<clear';
 				match = data.match(text);

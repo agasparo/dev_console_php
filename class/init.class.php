@@ -24,7 +24,7 @@ Class init {
 		file_put_contents($file, "");
 		$i = 0;
 		while (isset($this->modules[$i])) {
-			file_put_contents($file, serialize($this->modules[$i]));
+			file_put_contents($file, serialize($this->modules[$i])."\n", FILE_APPEND);
 			$i++;
 		}
 	}
@@ -39,20 +39,27 @@ Class init {
 
 		$fileList = glob($directory."*.module.php");
 
+		$path = new link('require/to_include.php');
+		$file = $path->get_link(1);
+
+		file_put_contents($file, "<?php\n");
+
 		foreach($fileList as $filename) {
 
-			$data = $this->infos_module($filename);
+			$data = $this->infos_module($filename, $file);
    			$this->modules[][$data['name_module']] = $data['infos_module'];
    			$this->nb_modules++;
 		}
+
+		file_put_contents($file, "\n?>", FILE_APPEND);
 	}
 
-	private function infos_module($link_module) {
+	private function infos_module($link_module, $file) {
 
 		$data = [];
 		$cut = explode("/", $link_module);
 		$data['name_module'] = substr($cut[count($cut) - 1], 0, strpos($cut[count($cut) - 1], '.'));
-		$data['infos_module']['full_link'] = $link_module;
+		file_put_contents($file, "require '".$link_module."';\n", FILE_APPEND);
 		$data['infos_module']['commandes'] = $this->get_module_commande($link_module);
 		return ($data);
 	}

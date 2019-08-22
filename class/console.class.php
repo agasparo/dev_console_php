@@ -4,27 +4,14 @@ class console {
 
 	private $commandes = [];
 	private $modules = [];
-	private $link_modules = [];
 
 	private $html;
 	private $res;
-	private $get = [];
-	private $add;
-	private $update;
-	private $delete;
 	private $var;
-	private $all_vars;
-	//private $unautorized = ["password"];
 
 	public function __Construct($comm, $anc) {
 
 		$this->get_infs_modules();
-		/*$tabs_bdd = new bdd_tab();
-		$this->get = $tabs_bdd->get_tab();
-		$this->add = $tabs_bdd->get_tab();
-		$this->update = $tabs_bdd->get_tab();
-		$this->delete = $tabs_bdd->get_tab();
-		$this->all_vars = $all_vars;
 		$this->init = file_get_contents('../dev_console/template/console_init.html');
 		if ($comm == "init") {
 			$this->html = file_get_contents('../dev_console/template/console.html');
@@ -37,7 +24,7 @@ class console {
 			$this->res = "<pre style='margin-left: 0.5%; color: white;'>".$this->commande_exist($comm)."</pre>";
 		}
 		$this->replace_text($anc, $comm);
-		$this->aff();*/
+		$this->aff();
 	}
 
 	private function get_infs_modules() {
@@ -50,14 +37,7 @@ class console {
 			$tmp = unserialize($value);
 			$this->commandes[] = $tmp[key($tmp)]['commandes'];
 			$this->modules[] = key($tmp);
-			$this->link_modules[] = $tmp[key($tmp)]['full_link'];
 		}
-	}
-
-	/*public function return_var() {
-		if (!empty($this->var))
-			return ($this->var);
-		return ("none");
 	}
 
 	private function aff() {
@@ -65,6 +45,7 @@ class console {
 	}
 
 	private function replace_text($anc, $comm) {
+
 		if (empty($this->res))
 			$this->html = str_replace("{{infos}}", $this->init, $this->html);
 		else
@@ -72,50 +53,27 @@ class console {
 	}
 
 	private function commande_exist($comm) {
+
 		$single = explode(" ", $comm);
-		if (in_array($single[0], $this->commandes))
-			return ($this->prepare($comm));
-		else
-			return ("La commande '".$comm."' existe pas");
+		$separe = explode(".", $single[0]);
+
+		if (!isset($separe[1]))
+			return ("Help");
+
+		if (!in_array($separe[1], $this->commandes[array_search($separe[0], $this->modules)]))
+			return ("Help ".$separe[0]);
+
+		if (!class_exists($separe[0]))
+			return ("The Class ".$separe[0]." doesn't exist ...");
+		$exec = new $separe[0]($comm);
+
+		if (!method_exists($exec, 'execute'))
+			return ("The class ".$separe[0]." haven't an execute public function ...");
+		return ($exec->execute());
 	}
 
-	private function prepare($comm) {
-		$single = explode(" ", $comm);
-		if (!isset($this->{$single[0]}))
-			return ($this->execute($single));
-		$tab = $this->{$single[0]};
-		if (!isset($single[1]))
-			return ("usage : ".$single[0]." [ ".implode(", ", $tab)." ]");
-		if (in_array($single[1], $tab))
-			return($this->execute($single));
-		return ("usage : ".$single[0]." [ ".implode(", ", $tab)." ]");
-	}
 
-	private function execute($tab) {
-		$autre = "";
-		if (isset($tab[2]) && isset($tab[3]) && isset($tab[4]))
-			$autre = " WHERE ".$tab[2]." ".$tab[3]." ".$tab[4];
-		if ($tab[0] == "get")
-			return($this->string($this->search_infos("SELECT * FROM ", $tab[1], $autre, []), $tab[1]));
-		else if ($tab[0] == "clear")
-			return ($this->init.">><<clear");
-		else if ($tab[0] == "add")
-			return ($this->create_reqs($tab));
-		else if ($tab[0] == "update")
-			return ($this->up_del($tab, "UPDATE"));
-		else if ($tab[0] == "delete")
-			return ($this->up_del($tab, "DELETE"));
-		else if ($tab[0] == "show")
-			return ($this->show());
-		else if ($tab[0] == "request")
-			return ($this->request_init($tab));
-		else if ($tab[0] == "list")
-			return ('--> '.implode("<br>--> ", $this->commandes));
-		else if ($tab[0] == "set")
-			return ($this->set_var($tab));
-		else if ($tab[0] == "get_var")
-			return ($this->get_var($tab));
-	}
+	/*
 
 	private function get_var($tab) {
 		require_once 'Console/Table.php';
