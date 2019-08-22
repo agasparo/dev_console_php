@@ -10,7 +10,7 @@ class console {
 	private $update;
 	private $delete;
 	private $var;
-	private $unautorized = ["id", "password"];
+	private $unautorized = ["password"];
 
 	public function __Construct($comm, $anc) {
 		$tabs_bdd = new bdd_tab();
