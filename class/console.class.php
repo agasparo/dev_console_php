@@ -20,14 +20,14 @@ class console {
 		$this->update = $tabs_bdd->get_tab();
 		$this->delete = $tabs_bdd->get_tab();
 		$this->all_vars = $all_vars;
-		$this->init = file_get_contents('template/console_init.html');
+		$this->init = file_get_contents('../dev_console/template/console_init.html');
 		if ($comm == "init") {
-			$this->html = file_get_contents('template/console.html');
+			$this->html = file_get_contents('../dev_console/template/console.html');
 			$this->res = "";
 		} else {
 			$this->html = "{{infos}}";
 			$single = explode(" ", $comm);
-			$this->res = "<pre style='margin-left: 0.5%;'>".$this->commande_exist($comm)."</pre>";
+			$this->res = "<pre style='margin-left: 0.5%; color: white;'>".$this->commande_exist($comm)."</pre>";
 		}
 		$this->replace_text($anc, $comm);
 		$this->aff();
@@ -169,7 +169,7 @@ class console {
 	}
 
 	private function up_del($tab, $type) {
-		require 'modules/bdd.php';
+		require '../dev_console/modules/bdd.php';
 		$req = "";
 		if ($type == "UPDATE") {
 			$req = $type;
@@ -211,7 +211,7 @@ class console {
 	}
 
 	private function search_infos($option, $table_bdd, $specific, $table_values) {
-		require 'modules/bdd.php';
+		require '../dev_console/modules/bdd.php';
 		$req = $option.$table_bdd.$specific;
 		$exec_req = $bdd->prepare($req);
 		$exec_req->execute($table_values);

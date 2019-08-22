@@ -1,5 +1,4 @@
-window.onload = function() {
-
+//window.onload = function() {
 	init();
 
 	function init() {
@@ -7,7 +6,7 @@ window.onload = function() {
 		input_console.onkeydown = function(e) {
 			if (e.which == 13) {
 				e.preventDefault();
-				$.post('console.php', {commande:input_console.value}, function(data) {
+				$.post('../dev_console/console.php', {commande:input_console.value}, function(data) {
 					input_console.remove();
 					let text = '>><<clear';
 					match = data.match(text);
@@ -26,4 +25,4 @@ window.onload = function() {
 			$("#value_console").focus();
 		}
 	}
-}
+//}*/
