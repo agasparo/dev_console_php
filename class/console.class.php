@@ -2,19 +2,24 @@
 
 class console {
 
+	private $commandes = [];
+	private $modules = [];
+	private $link_modules = [];
+
 	private $html;
 	private $res;
-	private $commandes = ["get", "clear", "add", "update", "show", "delete", "request", "list", "set", "get_var"];
 	private $get = [];
 	private $add;
 	private $update;
 	private $delete;
 	private $var;
 	private $all_vars;
-	private $unautorized = ["password"];
+	//private $unautorized = ["password"];
 
-	public function __Construct($comm, $anc, $all_vars) {
-		$tabs_bdd = new bdd_tab();
+	public function __Construct($comm, $anc) {
+
+		$this->get_infs_modules();
+		/*$tabs_bdd = new bdd_tab();
 		$this->get = $tabs_bdd->get_tab();
 		$this->add = $tabs_bdd->get_tab();
 		$this->update = $tabs_bdd->get_tab();
@@ -32,10 +37,24 @@ class console {
 			$this->res = "<pre style='margin-left: 0.5%; color: white;'>".$this->commande_exist($comm)."</pre>";
 		}
 		$this->replace_text($anc, $comm);
-		$this->aff();
+		$this->aff();*/
 	}
 
-	public function return_var() {
+	private function get_infs_modules() {
+
+		$path = new link('.env_modules');
+		$file = $path->get_link(1);
+		$data = file($file);
+		foreach ($data as $key => $value) {
+
+			$tmp = unserialize($value);
+			$this->commandes[] = $tmp[key($tmp)]['commandes'];
+			$this->modules[] = key($tmp);
+			$this->link_modules[] = $tmp[key($tmp)]['full_link'];
+		}
+	}
+
+	/*public function return_var() {
 		if (!empty($this->var))
 			return ($this->var);
 		return ("none");
@@ -257,7 +276,7 @@ class console {
 			$i++;
 		}
 		return ($tbl->getTable());
-	}
+	}*/
 }
 
 ?>
