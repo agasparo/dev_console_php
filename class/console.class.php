@@ -39,10 +39,6 @@ class console {
 		return ("none");
 	}
 
-	public function reset_var() {
-		$this->var = "";
-	}
-
 	private function aff() {
 		echo $this->html;
 	}
