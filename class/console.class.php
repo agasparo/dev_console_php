@@ -45,7 +45,7 @@ class console {
 	}
 
 	private function aff() {
-		
+
 		echo $this->html;
 	}
 
@@ -63,18 +63,45 @@ class console {
 		$separe = explode(".", $single[0]);
 
 		if (!isset($separe[1]))
-			return ("Help");
+			return ($this->help(0, ""));
 
 		if (!in_array($separe[1], $this->commandes[array_search($separe[0], $this->modules)]))
-			return ("Help ".$separe[0]);
+			return ($this->help(1, $separe[0]));
 
 		if (!class_exists($separe[0]))
 			return ("The Class ".$separe[0]." doesn't exist ...");
+
 		$exec = new $separe[0]($comm);
 
 		if (!method_exists($exec, 'execute'))
 			return ("The class ".$separe[0]." haven't an execute public function ...");
+
 		return ($exec->execute());
+	}
+
+	private function help($type, $other) {
+
+		if ($type == 0)
+			return ($this->create_table($this->modules, "Module(s) available"));
+
+		return ($this->create_table($this->commandes[array_search($separe[0], $this->modules)], "Commande(s) available for : ".$other))
+	}
+
+	private function create_table($elem, $header) {
+
+		$tbl = new Console_Table();
+
+		if (is_array($header))
+			$tbl->setHeaders($header);
+		else
+			$tbl->setHeaders([$header]);
+
+		foreach ($elem as $key => $value) {
+
+			$tbl->addRow([$key, $value]);
+		}
+
+		return ($tbl->getTable());
 	}
 }
 
