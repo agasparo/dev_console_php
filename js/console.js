@@ -1,4 +1,4 @@
-//window.onload = function() {
+window.onload = function() {
 	init();
 
 	function init() {
@@ -25,4 +25,4 @@
 			$("#value_console").focus();
 		}
 	}
-//}*/
+}
