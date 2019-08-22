@@ -10,8 +10,11 @@ function init() {
 				let text = '>><<clear';
 				match = data.match(text);
 				let e = data.split(">><<");
+				let com = input_console.value.split(" ");
 				if (match)
 					document.getElementById('conbsole_b').innerHTML = e[1].replace('clear', '');
+				else if (com[0] == "set")
+					window.location = "http://192.168.99.100.xip.io:41062/www/hypertube/";
 				else
 					$("#conbsole_b").append(data);
 				document.getElementById('conbsole_b').scrollTop = document.getElementById('conbsole_b').scrollHeight

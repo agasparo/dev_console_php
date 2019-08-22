@@ -7,7 +7,6 @@ require 'class/bdd_tab.class.php';
 session_start();
 
 extract($_POST);
-$url = "http://192.168.99.100.xip.io:41062/www/";
 
 $aff = "";
 
