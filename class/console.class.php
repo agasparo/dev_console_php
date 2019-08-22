@@ -97,8 +97,20 @@ class console {
 	}
 
 	private function get_var($tab) {
+		require_once 'Console/Table.php';
 		if (isset($tab[1])) {
 			$tab[1] = str_replace("$", "", $tab[1]);
+			if ($tab[1] == "*") {
+				$tbl = new Console_Table();
+				$tbl->setHeaders(["Nom de la variable", "Valeur de la variable"]);
+				foreach ($this->all_vars as $key => $value) {
+					if (is_array($value))
+						$tbl->addRow([$key, $this->show_var($key, $value)]);
+					else
+						$tbl->addRow([$key, $value]);
+				}
+				return ($tbl->getTable());
+			}
 			if (array_key_exists($tab[1], $this->all_vars)) {
 				if (is_array($this->all_vars[$tab[1]])) {
 					return ($this->show_var($tab[1], $this->all_vars[$tab[1]]));
