@@ -4,7 +4,7 @@ class console {
 
 	private $html;
 	private $res;
-	private $commandes = ["get", "clear", "add", "update", "show", "delete", "request", "list", "set"];
+	private $commandes = ["get", "clear", "add", "update", "show", "delete", "request", "list", "set", "get_var"];
 	private $get = [];
 	private $add;
 	private $update;
@@ -90,6 +90,26 @@ class console {
 			return ('--> '.implode("<br>--> ", $this->commandes));
 		else if ($tab[0] == "set")
 			return ($this->set_var($tab));
+		else if ($tab[0] == "get_var")
+			return ($this->get_var($tab));
+	}
+
+	private function get_var($tab) {
+		if (isset($tab[1])) {
+			$tab[1] = str_replace("$", "", $tab[1]);
+			echo "<br>";
+			echo $tab[1];
+			echo "<br>";
+			echo "_SESSION";
+			echo ${$tab[1]};
+			if (isset(${$tab[1]})) {
+				if (is_array(${$tab[1]}))
+					return ('array');
+				return (${$tab[1]});
+			}
+			return ('ok');
+		}
+		return ('GET_VAR : [variable]');
 	}
 
 	private function set_var($tab) {

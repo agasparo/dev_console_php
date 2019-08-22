@@ -15,10 +15,17 @@ if (isset($anc))
 if (isset($commande)) {
 	$console = new console($commande, $aff);
 	$tab = $console->return_var();
-	if (is_array($tab))
-		${$tab[0]} = $tab[1];
+	if (is_array($tab)) {
+		$e = explode("[", key($tab));
+		if (isset($e[1])) {
+			$e[1] = str_replace("]", "", $e[1]);
+			$e[1] = str_replace("'", "", $e[1]);
+			$e[1] = str_replace('"', "", $e[1]);
+			${$e[0]}[$e[1]] = $tab[key($tab)];
+		}
+		else
+			${$e[0]} = $tab[key($tab)];
+	}
 } else
 	$console = new console("init", $aff);
-
-print_r($_SESSION);
 ?>
