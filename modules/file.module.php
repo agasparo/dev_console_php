@@ -14,33 +14,23 @@ Class file {
 
 	private function structure() {
 
-		$fileList = glob("*");
+		exec("ls -R *", $rep);
 
-		$file_system = "";
+		$i = 0;
+		$str = "";
+		while (isset($rep[$i])) {
 
-		foreach($fileList as $filename) {
+			if ($rep[$i][strlen($rep[$i]) -1] == ":")
+				$str .= "<br>".$rep[$i]."<br>";
+			else if (empty($rep[$i]))
+				$str .= "<br>";
+			else
+				$str .= $rep[$i]." ";
 
-			if (is_dir($filename)) {
-				$file_system .= "└─ ".$filename."/<br>";
-				$file_system .= "&nbsp;&nbsp;&nbsp;&nbsp;├─ ".implode("<br>&nbsp;&nbsp;&nbsp;&nbsp;├─ ", $this->search_file($filename))."<br>";
-			} else
-				$file_system .= "├─ ".$filename."<br>";
+			$i++;
 		}
 
-		return ($file_system);
-
-	}
-
-	private function search_file($directory) {
-
-		$path = new link($directory);
-		$file = $path->get_link(1);
-		$fileList = glob($file."/*");
-
-		foreach ($fileList as $key => $value) {
-			$fileList[$key] = str_replace($file."/", "", $value);
-		}
-		return ($fileList);		
+		return ($str);
 	}
 
 	public function execute() {
