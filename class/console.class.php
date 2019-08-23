@@ -79,12 +79,51 @@ class console {
 		if (!class_exists($separe[0]))
 			return ("The Class ".$separe[0]." doesn't exist ...");
 
-		$exec = new $separe[0]($comm);
+		$args = explode(" ", $comm);
+		$commande = explode(".", $args[0]);
+		unset($args[0]);
+
+		$exec = new $separe[0]($commande[1], $this->return_arg(array_values($args)));
 
 		if (!method_exists($exec, 'execute'))
 			return ("The class ".$separe[0]." haven't an execute public function ...");
 
 		return ($exec->execute());
+	}
+
+	private function return_arg($tab) {
+
+		$i = 0;
+		$argum = [];
+		$in = 0;
+		$c = "";
+		while (isset($tab[$i])) {
+
+			if ($in == 0) {
+
+				if ($tab[$i][0] == "'" || $tab[$i][0] == '"') {
+
+					$c = $tab[$i][0];
+					if ($tab[$i][strlen($tab[$i]) - 1] == $c)
+						$argum[] = str_replace($c, '', $tab[$i]);
+					else {
+
+						$str = $tab[$i];
+						$in = 1;
+					}
+				}  else
+					$argum[] = $tab[$i];
+			} else {
+
+				$str .= " ".$tab[$i];
+				if ($tab[$i][strlen($tab[$i]) - 1] == $c) {
+					$in = 0;
+					$argum[] = str_replace($c, '', $str);
+				}
+			}
+			$i++;
+		}
+		return ($argum);
 	}
 
 	private function help($type, $other) {
