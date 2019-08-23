@@ -1,0 +1,1 @@
+INSERT INTO client(nom, email) VALUES(?, ?)

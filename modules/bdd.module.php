@@ -75,9 +75,33 @@ Class bdd {
 
 		if (count($this->args) != (count($cols) + 1))
 			return ("The number of values doesn't match with the number of colum (".(count($this->args) - 1)." value(s) for ".count($cols)." colum(s)) Colum to fill : ".implode(", ", $cols));
+		//ajouter la verif
+
+		$vals = "(".implode(", ", $cols).")";
+		$c = count($cols);
+		$values_in = "(";
+		while ($c > 0) {
+			$values_in .= "?, ";
+			$c--;
+		}
+
+		$values_in = substr($values_in, 0, -2).')';
+
+
+		$insert_data = $this->bdd->prepare("INSERT INTO ".$this->args[0].$vals." VALUES".$values_in);
+		unset($this->args[0]);
+
+		$this->args = array_values($this->args);
+
+		$insert_data->execute($this->args);
+
+		if ($insert_data->rowCount() > 0)
+			return ("data fill success");
+		return ("Error : data fill fail (maybe check the type of colum)");
 	}
 
 	private function get_just_val($tab, $champs) {
+
 		$i = 0;
 		$col = [];
 
@@ -87,7 +111,7 @@ Class bdd {
 				foreach ($tab[$i] as $key => $value) {
 					if ($champs[0] == "int") {
 						if (is_numeric($key))
-							$col[] = $value;
+							$col[$i][] = $value;
 					}
 				}
 			} else
@@ -98,6 +122,7 @@ Class bdd {
 	}
 
 	private function create_table($header, $values, $type) {
+
 		$tbl = new createtab();
 
 		if (is_array($header))
@@ -105,7 +130,11 @@ Class bdd {
 		else
 			$tbl->setHeaders([$header]);
 
-		$tbl->addRow($values);
+		$i = 0;
+		while (isset($values[$i])) {
+			$tbl->addRow($values[$i]);
+			$i++;
+		}
 
 		return ($tbl->getTable());
 	}
