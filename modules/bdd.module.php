@@ -44,7 +44,7 @@ Class bdd {
 	private function get() {
 
 		if (!isset($this->args[0]))
-			return ("Usage : bdd.get [table to get infos]");
+			return ("Usage : bdd.get [table to get data]");
 
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
@@ -56,6 +56,23 @@ Class bdd {
 		$tab_infs = $get_infs->fetchAll();
 
 		return ($this->create_table($this->get_just_val($colum, 'Field'), $this->get_just_val($tab_infs, ["int"]), 0));
+	}
+
+	private function insert() {
+
+		if (!isset($this->args[0]))
+			return ("Usage : bdd.get [table to insert data] [value for each colum (ex : 'arthur, gasparotto, 19 ...') ]");
+
+		$get_infs = $this->bdd->query('DESCRIBE '.$this->args[0]);
+		$colum = $get_infs->fetchAll();
+
+		$cols = $this->get_just_val($colum, 'Field');
+
+		if (!in_array($this->args[0], $this->tables))
+			return ("Table ".$this->args[0]." doesn't exist ");
+
+		if (count($this->args) != count($cols))
+			return ("The number of values doesn't match with the number of colum (".(count($this->args) - 1)." value(s) for ".(count($cols) - 1)." colum(s))");
 	}
 
 	private function get_just_val($tab, $champs) {
