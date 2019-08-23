@@ -55,10 +55,6 @@ Class bdd {
 		$get_infs = $this->bdd->query('SELECT * FROM '.$this->args[0]);
 		$tab_infs = $get_infs->fetchAll();
 
-		print_r($this->get_just_val($colum, 'Field'));
-		echo "<br>";
-		print_r($this->get_just_val($tab_infs, ["int"]));
-
 		return ($this->create_table($this->get_just_val($colum, 'Field'), $this->get_just_val($tab_infs, ["int"]), 0));
 	}
 
