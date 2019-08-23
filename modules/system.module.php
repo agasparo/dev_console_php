@@ -16,13 +16,7 @@ Class system {
 		$this->comm = $delete_usless[1];
 	}
 
-	private function go_to() {
-
-		if ($this->comm == "reload_modules")
-			return ($this->reload_mod());
-	}
-
-	private function reload_mod() {
+	private function reload_modules() {
 
 		$reload = new init();
 		$reload->force();
@@ -31,7 +25,7 @@ Class system {
 
 	public function execute() {
 
-		return ($this->go_to());
+		return ($this->{$this->comm}());
 	}
 }
 
