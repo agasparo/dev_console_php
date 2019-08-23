@@ -58,7 +58,7 @@ Class change_header {
 			$path_env = new link('.env');
 			$env = file($path_env->get_link(1));
 			$env[3] = $this->args[0];
-			file_put_contents($path_env->get_link(1), implode("\n", $env));
+			file_put_contents($path_env->get_link(1), implode("", $env));
 			return ("Header change : success");
 		}
 		return ("Usage : change_header.change ['new header']");
