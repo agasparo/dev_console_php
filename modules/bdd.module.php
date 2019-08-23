@@ -107,8 +107,37 @@ Class bdd {
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
 
+		$this->args[1] = str_replace(" ", "", $this->args[1]);
+		$this->args[2] = str_replace(" ", "", $this->args[2]);
 
+		$tab_up = explode(",", $this->args[1]);
+		$tab_where = explode(",", $this->args[2]);
 
+		if (($is_ok = $this->is_a_colum($tab_up)) != 1)
+			return ($is_ok);
+
+		if (($is_ok = $this->is_a_colum($tab_where)) != 1)
+			return ($is_ok);
+
+		
+
+	}
+
+	private function is_a_colum($tab) {
+
+		$get_infs = $this->bdd->query('DESCRIBE '.$this->args[0]);
+		$colum = $get_infs->fetchAll();
+		$cols = $this->get_just_val($colum, 'Field');
+
+		$i = 0;
+		while (isset($tab[$i])) {
+
+			$exp = explode(":", $tab[$i]);
+			if (!in_array($exp[0], $cols))
+				return ("The colum ".$exp[0]." doesn't exist in table ".$this->args[0]);
+			$i++;
+		}
+		return (1);
 	}
 
 	private function get_just_val($tab, $champs) {
