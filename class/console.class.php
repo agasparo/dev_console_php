@@ -18,7 +18,10 @@ class console {
 
 			$this->html = file_get_contents('../dev_console/template/console.html');
 			$path = new link('dev_console/js/console.js');
+			$path_env = new link('.env');
+			$env = file($path_env->get_link(1));
 			$this->html = str_replace("{{link}}", $path->get_link(0), $this->html);
+			$this->init = str_replace("{{header}}", $env[3], $this->init);
 			$this->res = "";
 		} else {
 
