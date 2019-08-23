@@ -11,13 +11,12 @@ $aff = "";
 
 if (isset($anc))
 	$aff = $anc;
-if (isset($commande)) {
-	$init = new init();
-	require 'require/to_include.php';
+
+$init = new init();
+require 'require/to_include.php';
+
+if (isset($commande))
 	$console = new console($commande, $aff);
-} else {
-	$init = new init();
-	require 'require/to_include.php';
+else
 	$console = new console("init", $aff);
-}
 ?>
