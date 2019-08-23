@@ -119,8 +119,48 @@ Class bdd {
 		if (($is_ok = $this->is_a_colum($tab_where)) != 1)
 			return ($is_ok);
 
-		
+		return ($this->update_bdd($tab_up, $tab_where));
 
+	}
+
+	private function update_bdd($update, $cond) {
+
+		$values = [];
+
+		$str = "UPDATE ".$this->args[0]." SET ";
+
+		$i = 0;
+		while (isset($update[$i])) {
+
+			$exp = explode(":", $update[$i]);
+			$values[] = $exp[1];
+			if (isset($update[$i + 1]))
+				$str .= $exp[0]." = ?, ";
+			else
+				$str .= $exp[0]." = ? ";
+			$i++;
+		}
+
+		$str .= "WHERE ";
+
+		$i = 0;
+		while (isset($cond[$i])) {
+
+			$exp = explode(":", $cond[$i]);
+			$values[] = $exp[1];
+			if (isset($cond[$i + 1]))
+				$str .= $exp[0]." = ? AND ";
+			else
+				$str .= $exp[0]." = ?";
+			$i++;
+		}
+
+		$up = $this->bdd->prepare($str);
+		$up->execute($values);
+
+		if ($up->rowCount() > 0)
+			return ("data update success");
+		return ("Error : data update fail -> ");
 	}
 
 	private function is_a_colum($tab) {
