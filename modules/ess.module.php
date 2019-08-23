@@ -2,7 +2,7 @@
 
 Class ess {
 
-	private $commandes = ["test", "ok"];
+	private $commandes = ["test", "oks"];
 
 	public function __Construct($comm) {
 

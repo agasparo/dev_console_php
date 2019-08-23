@@ -11,6 +11,13 @@ Class init {
 		$this->compare_modules();
 	}
 
+	public function force() {
+		
+		$path = new link('.env_modules');
+		$file = $path->get_link(1);
+		$this->load_modules($file);
+	}
+
 	private function compare_modules() {
 
 		$path = new link('.env_modules');
