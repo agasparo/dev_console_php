@@ -1,2 +1,4 @@
 To reload all modules do : system.reload_modules
 To use module commande do : {module}.{commande} [args ...]
+To add module juste put the module file in the directory modules
+The file name must be like : name.module.php
