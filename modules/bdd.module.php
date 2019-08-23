@@ -123,6 +123,44 @@ Class bdd {
 
 	}
 
+	private function delete() {
+
+		if (!isset($this->args[0]) || !isset($this->args[1]))
+			return ("Usage : bdd.get [table to insert data] [condition ex('id:3')]");
+
+		if (!in_array($this->args[0], $this->tables))
+			return ("Table ".$this->args[0]." doesn't exist ");
+
+		$this->args[1] = str_replace(" ", "", $this->args[1]);
+		$tab_where = explode(",", $this->args[1]);
+
+		if (($is_ok = $this->is_a_colum($tab_where)) != 1)
+			return ($is_ok);
+
+		$values = [];
+		$str = "DELETE FROM ".$this->args[0]." WHERE ";
+
+		$i = 0;
+		while (isset($tab_where[$i])) {
+
+			$exp = explode(":", $tab_where[$i]);
+			$values[] = $exp[1];
+			if (isset($tab_where[$i + 1]))
+				$str .= $exp[0]." = ? AND ";
+			else
+				$str .= $exp[0]." = ?";
+			$i++;
+		}
+
+		$del = $this->bdd->prepare($str);
+		$del->execute($values);
+
+		if ($del->rowCount() > 0)
+			return ("data delete success");
+		return ("Error : data delete fail");
+
+	}
+
 	private function update_bdd($update, $cond) {
 
 		$values = [];
@@ -160,7 +198,7 @@ Class bdd {
 
 		if ($up->rowCount() > 0)
 			return ("data update success");
-		return ("Error : data update fail -> ");
+		return ("Error : data update fail");
 	}
 
 	private function is_a_colum($tab) {
