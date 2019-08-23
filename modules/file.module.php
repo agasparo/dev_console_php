@@ -11,6 +11,11 @@ Class file {
 		$this->args = $arguments;
 		$this->comm = $commande;
 	}
+
+	public function execute() {
+
+		return ($this->{$this->comm}());
+	}
 }
 
 ?>
