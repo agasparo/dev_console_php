@@ -1,6 +1,6 @@
 <?php
 
-Class ess {
+Class bdd {
 
 	private $commandes = ["test", "oks"];
 
