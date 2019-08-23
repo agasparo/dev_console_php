@@ -67,12 +67,14 @@ Class bdd {
 		$colum = $get_infs->fetchAll();
 
 		$cols = $this->get_just_val($colum, 'Field');
+		unset($cols[0]);
+		$cols = array_values($cols);
 
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
 
-		if (count($this->args) != count($cols))
-			return ("The number of values doesn't match with the number of colum (".(count($this->args) - 1)." value(s) for ".(count($cols) - 1)." colum(s))");
+		if (count($this->args) != (count($cols) + 1))
+			return ("The number of values doesn't match with the number of colum (".(count($this->args) - 1)." value(s) for ".count($cols)." colum(s)) Colum to fill : ".implode(", ", $cols));
 	}
 
 	private function get_just_val($tab, $champs) {
