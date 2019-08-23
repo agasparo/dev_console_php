@@ -33,6 +33,13 @@ Class file {
 		return ($str);
 	}
 
+	private function show() {
+
+		if (!isset($this->args[0]))
+			return ("Usage : file.show [file to read]");
+		
+	}
+
 	public function execute() {
 
 		return ($this->{$this->comm}());
