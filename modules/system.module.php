@@ -4,7 +4,7 @@ Class system {
 
 	private $comm;
 	private $args = [];
-	private $commandes = ["reload_modules"];
+	private $commandes = ["reload_modules", "clear"];
 
 	public function __Construct($commande, $arguments) {
 
@@ -17,6 +17,18 @@ Class system {
 		$reload = new init();
 		$reload->force();
 		return ("Modules are reloading with success");
+	}
+
+	private function clear() {
+
+		$str = "<br>";
+		$i = 0;
+		while ($i <= 3) {
+			$str .= $str;
+			$i++;
+		}
+
+		return ($str);
 	}
 
 	public function execute() {
