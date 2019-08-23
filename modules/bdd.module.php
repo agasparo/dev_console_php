@@ -27,10 +27,20 @@ Class bdd {
 
 	private function show_table() {
 
+		$req_table = $this->bdd->query("SHOW TABLES");
+		$res = $req_table->fetchAll();
+		$tables = [];
 
+		$i = 0;
+		while (isset($res[$i])) {
+			$tables[] = $res[$i][0];
+			$i++;
+		}
+
+		return ($this->create_table("Database table(s)", $tables, 0));
 	}
 
-	private function create_table($header, $values) {
+	private function create_table($header, $values, $type) {
 		$tbl = new createtab();
 
 		if (is_array($header))
@@ -40,7 +50,10 @@ Class bdd {
 
 		foreach ($values as $key => $value) {
 
-			$tbl->addRow([$key, $value]);
+			if ($type == 1)
+				$tbl->addRow([$key, $value]);
+			else
+				$tbl->addRow([$value]);
 		}
 
 		return ($tbl->getTable());
