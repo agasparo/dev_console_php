@@ -63,6 +63,9 @@ Class bdd {
 		if (!isset($this->args[0]))
 			return ("Usage : bdd.get [table to insert data] [value for each colum (ex : 'arthur, gasparotto, 19 ...') ]");
 
+		if (!in_array($this->args[0], $this->tables))
+			return ("Table ".$this->args[0]." doesn't exist ");
+
 		$get_infs = $this->bdd->query('DESCRIBE '.$this->args[0]);
 		$colum = $get_infs->fetchAll();
 
@@ -70,12 +73,8 @@ Class bdd {
 		unset($cols[0]);
 		$cols = array_values($cols);
 
-		if (!in_array($this->args[0], $this->tables))
-			return ("Table ".$this->args[0]." doesn't exist ");
-
 		if (count($this->args) != (count($cols) + 1))
 			return ("The number of values doesn't match with the number of colum (".(count($this->args) - 1)." value(s) for ".count($cols)." colum(s)) Colum to fill : ".implode(", ", $cols));
-		//ajouter la verif
 
 		$vals = "(".implode(", ", $cols).")";
 		$c = count($cols);
@@ -98,6 +97,18 @@ Class bdd {
 		if ($insert_data->rowCount() > 0)
 			return ("data fill success");
 		return ("Error : data fill fail (maybe check the type of colum)");
+	}
+
+	private function update() {
+
+		if (!isset($this->args[0]) || !isset($this->args[1]) || !isset($this->args[2]))
+			return ("Usage : bdd.get [table to insert data] [data to change ex('nom:gasparotto, prenom:arthur')] [condition ex('id:3')]");
+
+		if (!in_array($this->args[0], $this->tables))
+			return ("Table ".$this->args[0]." doesn't exist ");
+
+
+
 	}
 
 	private function get_just_val($tab, $champs) {
@@ -131,7 +142,17 @@ Class bdd {
 			$tbl->setHeaders([$header]);
 
 		$i = 0;
+		if (!is_array($values[$i])) {
+
+			foreach ($values as $value) {
+				$tbl->addRow([$value]);
+			}
+
+			return ($tbl->getTable());
+		}
+
 		while (isset($values[$i])) {
+
 			$tbl->addRow($values[$i]);
 			$i++;
 		}
