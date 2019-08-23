@@ -81,15 +81,18 @@ class console {
 
 	private function help($type, $other) {
 
-		if ($type == 0)
-			return ($this->create_table($this->modules, "Module(s) available"));
+		$path = new link('template/help.txt');
+		$file = $path->get_link(1);
 
-		return ($this->create_table($this->commandes[array_search($separe[0], $this->modules)], "Commande(s) available for : ".$other))
+		if ($type == 0)
+			return (file_get_contents($file).$this->create_table($this->modules, ["Module(s) available", "Commande(s) available"], 0));
+
+		return ($this->create_table($this->commandes[array_search($other, $this->modules)], "Commande(s) available for : ".$other, 1));
 	}
 
-	private function create_table($elem, $header) {
+	private function create_table($elem, $header, $type) {
 
-		$tbl = new Console_Table();
+		$tbl = new createtab();
 
 		if (is_array($header))
 			$tbl->setHeaders($header);
@@ -97,10 +100,13 @@ class console {
 			$tbl->setHeaders([$header]);
 
 		foreach ($elem as $key => $value) {
-
-			$tbl->addRow([$key, $value]);
+			if ($type == 0){
+				$a = implode(", ", $this->commandes[array_search($value, $this->modules)]);
+				$tbl->addRow([$value, $a]);
+			}
+			else
+				$tbl->addRow([$value]);
 		}
-
 		return ($tbl->getTable());
 	}
 }

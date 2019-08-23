@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Console/Table.php';
+require 'class/tab.class.php';
 require 'class/link.class.php';
 require 'class/console.class.php';
 require 'class/init.class.php';

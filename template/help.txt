@@ -1,0 +1,2 @@
+To see all commandes do : system.list commandes
+To use module commande do : {module}.{commande} [args ...]
