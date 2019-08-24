@@ -4,15 +4,15 @@
 	background-color: black;
 	border: none;
 	outline: none;
-	color: white;
+	color: #FFF;
 	width: 60%;
 }
 
-#label_console {                                
+#label_console {                                    
 	margin-left: 0.5%;
 }
 
-#console_1 {              
+#console_1 {                  
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -23,7 +23,7 @@
 	cursor: pointer;
 }
 
-#conbsole_b {  
+#conbsole_b {      
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -33,4 +33,9 @@
 	color: white;
 	overflow-y: auto;
 	z-index: 3000;
+}
+
+#txt_console {  
+	margin-left: 0.5%;
+	color: #FFF;
 }

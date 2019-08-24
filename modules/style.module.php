@@ -35,6 +35,12 @@ Class style {
 
 		if (!isset($this->args[0]))
 			return ("Usage : style.txt_color [txt_color]");
+
+		$this->change_css([$this->args[0], ":;"], "#txt_console", ["color", ":;"]);
+		$this->change_css([$this->args[0], ":;"], "#value_console", ["color", ":;"]);
+		$this->change_css([$this->args[0], ":;"], "#conbsole_b", ["color", ":;"]);
+
+		return ("Css update success");
 	}
 
 	private function back_color() {

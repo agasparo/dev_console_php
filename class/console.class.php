@@ -29,7 +29,7 @@ class console {
 			$this->html = "{{infos}}";
 			$single = explode(" ", $comm);
 			$this->init = str_replace("{{header}}", $env[3], $this->init);
-			$this->res = "<pre style='margin-left: 0.5%; color: white;'>".$this->commande_exist($comm)."</pre>";
+			$this->res = "<pre id='txt_console'>".$this->commande_exist($comm)."</pre>";
 		}
 
 		$this->replace_text($anc, $comm);
