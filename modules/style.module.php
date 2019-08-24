@@ -25,7 +25,7 @@ Class style {
 		if ($this->args[1] < style::min_height)
 			return ("Error : height must be more than ".style::min_height."%");
 
-		return ($this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]));
+		$this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]);
 
 	}
 
@@ -49,7 +49,9 @@ Class style {
 
 		$i = 0;
 		while (isset($data[$i])) {
+			$a = 0;
 			if (trim(substr($data[$i], 0, strpos($data[$i], " "))) == $elem) {
+				$a = 1;
 				$data[$i] = str_replace(trim(substr($data[$i], 0, strpos($data[$i], " "))), "", $data[$i]);
 				$e = explode(";", $data[$i]);
 				foreach ($e as $key => $value) {
@@ -60,13 +62,14 @@ Class style {
 						$ex[1] = $tab[1];
 					$e[$key] = implode(": ", $ex);
 				}
-				$data[$i] = $elem." ".implode(";", $e);
+				$data[$i] = "\n".$elem." { \n".implode(";\n", $e);
 			}
+			if ($a == 0)
+				$data[$i] = str_replace(trim(substr($data[$i], 0, strpos($data[$i], " "))), trim(substr($data[$i], 0, strpos($data[$i], " ")))." {", $data[$i]);
 			$i++;
 		}
-		print_r($data);
-
-		//print_r($data);
+		$data = implode("}", $data);
+		file_put_contents($path_env->get_link(1), $data);
 	}
 
 	public function execute() {
