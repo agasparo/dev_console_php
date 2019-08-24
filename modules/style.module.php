@@ -16,21 +16,25 @@ Class style {
 
 		if (!isset($this->args[0]) && !isset($this->args[1]))
 			return ("Usage : style.size [width] [height]");
+
 	}
 
 	private function txt_color() {
 
-		
+		if (!isset($this->args[0]))
+			return ("Usage : style.txt_color [txt_color]");
 	}
 
 	private function back_color() {
 
-		
+		if (!isset($this->args[0]))
+			return ("Usage : style.back_color [back_color]");		
 	}
 
 	private function change_css() {
 
-
+		$path_env = new link('css/style.css');
+		$data = file($path_env->get_link(1));
 	}
 
 	public function execute() {
