@@ -26,6 +26,9 @@ Class style {
 			return ("Error : height must be more than ".style::min_height."%");
 
 		$this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]);
+
+		return ("Size Change");
+		//reload the page
 	}
 
 	private function txt_color() {
