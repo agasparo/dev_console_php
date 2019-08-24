@@ -10,7 +10,7 @@ function init() {
 			e.preventDefault();
 			$.post('http://localhost:8080/dev_console/console.php', {commande:input_console.value}, function(data) { // chnager url ici
 				
-				let to_search = "clearing";
+				let to_search = "clearing the console";
 				clear = data.match(to_search);
 
 				let search = "Css update success";

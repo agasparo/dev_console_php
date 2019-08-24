@@ -21,7 +21,7 @@ Class system {
 
 	private function clear() {
 
-		return ("clearing");
+		return ("clearing the console");
 	}
 
 	private function model_module() {
