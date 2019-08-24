@@ -26,6 +26,7 @@ Class style {
 			return ("Error : height must be more than ".style::min_height."%");
 
 		$this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]);
+		$this->change_css([$this->args[0]."%", ($this->args[1] + 2)."%"], "#console_1", ["width", "height"]);
 
 		return ("reload the page to apply change");
 	}
