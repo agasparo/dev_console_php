@@ -14,7 +14,8 @@ Class style {
 
 	private function size() {
 
-		
+		if (!isset($this->args[0]) && !isset($this->args[1]))
+			return ("Usage : style.size [width] [height]");
 	}
 
 	private function txt_color() {
@@ -29,7 +30,7 @@ Class style {
 
 	private function change_css() {
 
-		
+
 	}
 
 	public function execute() {
