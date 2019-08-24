@@ -21,14 +21,14 @@
 	cursor: pointer;
 	box-shadow: 1px 1px 12px #555;
 }
-#conbsole_b{ 
+#conbsole_b { 
 position: fixed;
-left: 0;
-bottom: 0;
-background-color: black;
-width: 40%;
-height: 40%;
-color: white;
-overflow-y: auto;
-z-index: 3000;
-}
+	left: 0;
+	bottom: 0;
+	background-color: black;
+	width: 40%;
+	height: 40%;
+	color: white;
+	overflow-y: auto;
+	z-index: 3000;
+	}
