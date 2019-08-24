@@ -27,8 +27,7 @@ Class style {
 
 		$this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]);
 
-		return ("Size Change");
-		//reload the page
+		return ("reload the page to apply change");
 	}
 
 	private function txt_color() {
