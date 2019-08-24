@@ -28,7 +28,7 @@ Class style {
 		$this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]);
 		$this->change_css([$this->args[0]."%", ($this->args[1] + 2)."%"], "#console_1", ["width", "height"]);
 
-		return ("reload the page to apply change");
+		return ("Css update success");
 	}
 
 	private function txt_color() {

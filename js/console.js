@@ -13,7 +13,7 @@ function init() {
 				let to_search = "clearing";
 				clear = data.match(to_search);
 
-				let search = "reload the page to apply change";
+				let search = "Css update success";
 				reload = data.match(search);
 
 				if (clear || reload)
