@@ -42,8 +42,8 @@ Class style {
 		if (!isset($this->args[0]))
 			return ("Usage : style.back_color [back_color]");
 
-		$this->change_css([$this->args[0], ""], "#conbsole_b", ["background-color", ""]);
-		$this->change_css([$this->args[0], ""], "#value_console", ["background-color", ""]);
+		$this->change_css([$this->args[0], ":;"], "#conbsole_b", ["background-color", ":;"]);
+		$this->change_css([$this->args[0], ":;"], "#value_console", ["background-color", ":;"]);
 
 		return ("Css update success");	
 	}
