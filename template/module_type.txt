@@ -1,0 +1,36 @@
+<?php
+
+// if file name is module_type.module.php
+// the classname mus be like : module_type
+
+Class module_type {
+
+	private $comm;
+	private $args = [];
+	private $commandes = ["commande_1", "commande_2", "..."];
+
+	public function __Construct($commande, $arguments) {
+
+		$this->args = $arguments;
+		$this->comm = $commande;
+	}
+
+	private function commande_1() {
+
+		[...]
+	}
+
+	private function commande_2() {
+
+		[...]
+	}
+
+	[...]
+
+	public function execute() {
+
+		return ($this->{$this->comm}());
+	}
+}
+
+?>
