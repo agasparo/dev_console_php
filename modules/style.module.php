@@ -25,7 +25,7 @@ Class style {
 		if ($this->args[1] < style::min_height)
 			return ("Error : height must be more than ".style::min_height."%");
 
-		return ($this->change_css([$this->args[0], $this->args[1]]));
+		return ($this->change_css([$this->args[0], $this->args[1]], "conbsole_b"));
 
 	}
 
@@ -41,7 +41,7 @@ Class style {
 			return ("Usage : style.back_color [back_color]");		
 	}
 
-	private function change_css() {
+	private function change_css($tab, $elem) {
 
 		$path_env = new link('css/style.css');
 		$data = file_get_contents($path_env->get_link(1));
