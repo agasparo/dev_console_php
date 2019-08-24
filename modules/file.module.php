@@ -3,7 +3,7 @@
 Class file {
 
 	private $comm;
-	private $commandes = ["structure", "show", "update"];
+	private $commandes = ["structure", "show"];
 	private $args = [];
 
 	public function __Construct($commande, $arguments) {
@@ -37,7 +37,14 @@ Class file {
 
 		if (!isset($this->args[0]))
 			return ("Usage : file.show [file to read]");
-		
+
+		if (!file_exists($this->args[0]))
+			return ("The file : ".$this->args[0]." doesn't exist");
+
+		$path_env = new link($this->args[0]);
+		$env = file_get_contents($path_env->get_link(1));
+
+		return ($env);
 	}
 
 	public function execute() {

@@ -23,7 +23,7 @@ Class bdd {
 		$data[2] = str_replace("\n", "", $data[2]);
 		$data[3] = str_replace("\n", "", $data[3]);
 
-		$this->bdd = new PDO(str_replace("\n", "", $data[0]), str_replace("\n", "", $data[1]), $data[2]); // ici
+		$this->bdd = new PDO(str_replace("\n", "", $data[0]), str_replace("\n", "", $data[1]), $data[2]);
 
 		$req_table = $this->bdd->query("SHOW TABLES");
 		$res = $req_table->fetchAll();
