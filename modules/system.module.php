@@ -21,14 +21,7 @@ Class system {
 
 	private function clear() {
 
-		$str = "<br>";
-		$i = 0;
-		while ($i <= 3) {
-			$str .= $str;
-			$i++;
-		}
-
-		return ($str);
+		return ("clearing");
 	}
 
 	private function model_module() {
