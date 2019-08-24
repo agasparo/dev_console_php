@@ -25,7 +25,7 @@ Class style {
 		if ($this->args[1] < style::min_height)
 			return ("Error : height must be more than ".style::min_height."%");
 
-		return ($this->change_css([$this->args[0], $this->args[1]], "#conbsole_b"));
+		return ($this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]));
 
 	}
 
@@ -41,7 +41,7 @@ Class style {
 			return ("Usage : style.back_color [back_color]");		
 	}
 
-	private function change_css($tab, $elem) {
+	private function change_css($tab, $elem, $keys) {
 
 		$path_env = new link('css/style.css');
 		$data = str_replace("{", "", file_get_contents($path_env->get_link(1)));
@@ -50,10 +50,21 @@ Class style {
 		$i = 0;
 		while (isset($data[$i])) {
 			if (trim(substr($data[$i], 0, strpos($data[$i], " "))) == $elem) {
-				
+				$data[$i] = str_replace(trim(substr($data[$i], 0, strpos($data[$i], " "))), "", $data[$i]);
+				$e = explode(";", $data[$i]);
+				foreach ($e as $key => $value) {
+					$ex = explode(":", trim(str_replace(" ", "", $value)));
+					if ($ex[0] == $keys[0])
+						$ex[1] = $tab[0];
+					if ($ex[0] == $keys[1])
+						$ex[1] = $tab[1];
+					$e[$key] = implode(": ", $ex);
+				}
+				$data[$i] = $elem." ".implode(";", $e);
 			}
 			$i++;
 		}
+		print_r($data);
 
 		//print_r($data);
 	}
