@@ -5,6 +5,8 @@ Class style {
 	private $comm;
 	private $args = [];
 	private $commandes = ["size", "txt_color", "back_color"];
+	const max_height = 98;
+	const min_height = 30;
 
 	public function __Construct($commande, $arguments) {
 
@@ -14,8 +16,16 @@ Class style {
 
 	private function size() {
 
-		if (!isset($this->args[0]) && !isset($this->args[1]))
+		if (!isset($this->args[0]) || !isset($this->args[1]))
 			return ("Usage : style.size [width] [height]");
+
+		if ($this->args[1] > style::max_height)
+			return ("Error : height must be less than ".style::max_height."%");
+
+		if ($this->args[1] < style::min_height)
+			return ("Error : height must be more than ".style::min_height."%");
+
+		return ($this->change_css([$this->args[0], $this->args[1]]));
 
 	}
 
@@ -34,7 +44,7 @@ Class style {
 	private function change_css() {
 
 		$path_env = new link('css/style.css');
-		$data = file($path_env->get_link(1));
+		$data = file_get_contents($path_env->get_link(1));
 	}
 
 	public function execute() {
