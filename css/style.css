@@ -1,4 +1,4 @@
-#value_console { 
+#value_console {      
 	background-color: black;
 	border: none;
 	outline: none;
@@ -6,11 +6,11 @@
 	width: 60%;
 }
 
-#label_console { 
+#label_console {      
 	margin-left: 0.5%;
 }
 
-#console_1 { 
+#console_1 {      
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -21,14 +21,15 @@
 	cursor: pointer;
 	box-shadow: 1px 1px 12px #555;
 }
+
 #conbsole_b { 
-position: fixed;
+	position: fixed;
 	left: 0;
 	bottom: 0;
 	background-color: black;
 	width: 40%;
-	height: 40%;
+	height: 54%;
 	color: white;
 	overflow-y: auto;
 	z-index: 3000;
-	}
+}

@@ -26,7 +26,6 @@ Class style {
 			return ("Error : height must be more than ".style::min_height."%");
 
 		$this->change_css([$this->args[0]."%", $this->args[1]."%"], "#conbsole_b", ["width", "height"]);
-
 	}
 
 	private function txt_color() {
@@ -62,7 +61,8 @@ Class style {
 						$ex[1] = $tab[1];
 					$e[$key] = implode(": ", $ex);
 				}
-				$data[$i] = "\n".$elem." { \n".implode(";\n", $e);
+				$data[$i] = "\n\n".$elem." { \n\t".implode(";\n\t", $e);
+				$data[$i] = substr($data[$i], 0, -1);
 			}
 			if ($a == 0)
 				$data[$i] = str_replace(trim(substr($data[$i], 0, strpos($data[$i], " "))), trim(substr($data[$i], 0, strpos($data[$i], " ")))." {", $data[$i]);
