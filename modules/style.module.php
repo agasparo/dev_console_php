@@ -12,14 +12,24 @@ Class style {
 		$this->comm = $commande;
 	}
 
-	private function commande_1() {
+	private function size() {
 
-		[...]
+		
 	}
 
-	private function commande_2() {
+	private function txt_color() {
 
-		[...]
+		
+	}
+
+	private function back_color() {
+
+		
+	}
+
+	private function change_css() {
+
+		
 	}
 
 	public function execute() {
