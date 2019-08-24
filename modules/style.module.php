@@ -25,7 +25,7 @@ Class style {
 		if ($this->args[1] < style::min_height)
 			return ("Error : height must be more than ".style::min_height."%");
 
-		return ($this->change_css([$this->args[0], $this->args[1]], "conbsole_b"));
+		return ($this->change_css([$this->args[0], $this->args[1]], "#conbsole_b"));
 
 	}
 
@@ -44,7 +44,18 @@ Class style {
 	private function change_css($tab, $elem) {
 
 		$path_env = new link('css/style.css');
-		$data = file_get_contents($path_env->get_link(1));
+		$data = str_replace("{", "", file_get_contents($path_env->get_link(1)));
+		$data = explode("}", $data);
+
+		$i = 0;
+		while (isset($data[$i])) {
+			if (trim(substr($data[$i], 0, strpos($data[$i], " "))) == $elem) {
+				
+			}
+			$i++;
+		}
+
+		//print_r($data);
 	}
 
 	public function execute() {
