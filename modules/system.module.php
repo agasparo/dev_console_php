@@ -4,7 +4,7 @@ Class system {
 
 	private $comm;
 	private $args = [];
-	private $commandes = ["reload_modules", "clear"];
+	private $commandes = ["reload_modules", "clear", "model_module"];
 
 	public function __Construct($commande, $arguments) {
 
@@ -29,6 +29,12 @@ Class system {
 		}
 
 		return ($str);
+	}
+
+	private function model_module() {
+
+		$path_env = new link('template/module_type.txt');
+		return (file_get_contents($path_env->get_link(1)));
 	}
 
 	public function execute() {
