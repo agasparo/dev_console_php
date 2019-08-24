@@ -42,7 +42,7 @@ Class file {
 			return ("The file : ".$this->args[0]." doesn't exist");
 
 		$path_env = new link($this->args[0]);
-		$env = file_get_contents($path_env->get_link(1));
+		$env = str_replace("<?php", "", file_get_contents($path_env->get_link(1)));
 
 		return ($env);
 	}
