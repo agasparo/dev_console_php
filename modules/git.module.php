@@ -51,9 +51,11 @@ Class git {
 
 		echo "push en cours ...<br>";
 
-		shell_exec("cd ".$this->args[0]." && git add .");
-		shell_exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
-		echo shell_exec("cd ".$this->args[0]." && git push");
+		exec("cd ".$this->args[0]." && git add .");
+		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
+		exec("cd ".$this->args[0]." && git push", $res);
+
+		print_r($res);
 
 		return ("ok");
 	}
