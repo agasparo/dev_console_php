@@ -33,9 +33,12 @@ Class git {
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
 
-		exec("cd ".$this->args[0]." && git add .");
-		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
-		exec("cd ".$this->args[0]." && git push");	
+		$path_directory = new link($this->args[0]);
+		$dir = file($path_env->get_link(1));
+
+		exec("cd ".$dir." && git add .");
+		exec("cd ".$dir." && git commit -m '".$env[4]."'");
+		exec("cd ".$dir." && git push");	
 	}
 
 	public function execute() {
