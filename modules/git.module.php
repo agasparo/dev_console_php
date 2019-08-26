@@ -25,6 +25,7 @@ Class git {
 		else
 			$env[4] = "\n".$this->args[0];
 		file_put_contents($path_env->get_link(1), implode("", $env));
+
 		return ("Commit name change success");
 	}
 
@@ -49,13 +50,18 @@ Class git {
 		if (!file_exists($this->args[0]))
 			return ("The file : ".$this->args[0]." doesn't exist");
 
-		exec("cd ".$this->args[0]." && git add .");
-		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
+		exec("cd ".$this->args[0]." && git add .", $add);
+		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'", $commit);
 		exec("cd ".$this->args[0]." && git push", $res);
+
+		print_r($add);
+		echo "<br>";
+		print_r($commit);
+		echo "<br>";
 
 		if (empty($res))
 			return ("Push success");
-		
+
 		return ("Error : push failed");
 	}
 
