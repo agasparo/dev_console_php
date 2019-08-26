@@ -20,12 +20,16 @@ Class file {
 		$str = "";
 		while (isset($rep[$i])) {
 
-			if ($rep[$i][strlen($rep[$i]) -1] == ":")
-				$str .= "<br>".$rep[$i]."<br>";
-			else if (empty($rep[$i]))
+			if (!empty($rep[$i])) {
+
+				if ($rep[$i][strlen($rep[$i]) - 1] == ":")
+					$str .= "<br>".$rep[$i]."<br>";
+				else if (empty($rep[$i]))
+					$str .= "<br>";
+				else
+					$str .= $rep[$i]." ";
+			} else
 				$str .= "<br>";
-			else
-				$str .= $rep[$i]." ";
 
 			$i++;
 		}

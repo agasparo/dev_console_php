@@ -1,6 +1,6 @@
 
 
-#value_console {             
+#value_console {                 
 	background-color: black;
 	border: none;
 	outline: none;
@@ -8,7 +8,7 @@
 	width: 60%;
 }
 
-#label_console {                                                
+#label_console {                                                    
 	margin-left: 0.5%;
 }
 
@@ -35,7 +35,7 @@
 	z-index: 3000;
 }
 
-#txt_console {              
+#txt_console {                  
 	margin-left: 0.5%;
 	color: #FFF;
 }
