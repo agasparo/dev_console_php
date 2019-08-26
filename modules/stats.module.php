@@ -17,6 +17,21 @@ Class stats {
 
 	}
 
+	private function most() {
+
+
+	}
+
+	private function less() {
+
+
+	}
+
+	private function moyenne() {
+
+		
+	}
+
 	public function execute() {
 
 		return ($this->{$this->comm}());
