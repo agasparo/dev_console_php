@@ -4,15 +4,32 @@ Class link {
 
 	private $file;
 	private $actual_url;
+	private $link_console_php;
 
 	public function __Construct($link) {
+
 		$this->file = $link;
 		$this->actual_url = "http://{$_SERVER['HTTP_HOST']}";
 	}
 
+	private function get_console_dir() {
+
+		$actual_path = getcwd();
+
+		while (!file_exists($actual_path."/dev_console")) {
+			$ex = explode("/", $actual_path);
+			unset($ex[count($ex) - 1]);
+			$actual_path = implode("/", $ex);
+		}
+
+		return ($actual_path."/dev_console");
+	}
+
 	public function get_link($type) {
+
 		$real_path = getcwd();
-		$path = $real_path."/".$this->file;
+		$path = $this->get_console_dir()."/".$this->file;
+
 		while (!file_exists($path)) {
 			$e = explode("/", $real_path);
 			unset($e[count($e) - 1]);
@@ -35,7 +52,6 @@ Class link {
 			$str = $e[$i - 1];
 		return ($this->actual_url."/".$str."/".implode("/", $e1));
 	}
-
 }
 
 ?>
