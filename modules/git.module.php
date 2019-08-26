@@ -36,6 +36,7 @@ Class git {
 
 		if (isset($env[4]))
 			return ("Commit name : ".$env[4]);
+		
 		return ("No Commit name set");
 	}
 
