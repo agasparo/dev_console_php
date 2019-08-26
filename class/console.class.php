@@ -11,15 +11,21 @@ class console {
 
 	public function __Construct($comm, $anc) {
 
+		$path_env = new link('template/console.html');
+		$html_tem = $path_env->get_link(1);
+
+		$path_env = new link('template/console_init.html');
+		$html_init = $path_env->get_link(1);
+
 		$this->get_infs_modules();
-		$this->init = file_get_contents('../dev_console/template/console_init.html');
+		$this->init = file_get_contents($html_init);
 
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
 
 		if ($comm == "init") {
 
-			$this->html = file_get_contents('../dev_console/template/console.html');
+			$this->html = file_get_contents($html_tem);
 			$path = new link('js/console.js');
 			$this->html = str_replace("{{link}}", $path->get_link(0), $this->html);
 			$this->init = str_replace("{{header}}", $env[3], $this->init);
