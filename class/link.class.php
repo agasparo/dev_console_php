@@ -28,7 +28,12 @@ Class link {
 			unset($e1[$i]);
 			$i++;
 		}
-		return ($this->actual_url."/".$e[$i - 1]."/".implode("/", $e1));
+		$e1 = array_values($e1);
+		if (is_dir($e1[0]))
+			$str = $e[$i - 2]."/".$e[$i - 1];
+		else
+			$str = $e[$i - 1];
+		return ($this->actual_url."/".$str."/".implode("/", $e1));
 	}
 
 }
