@@ -20,7 +20,10 @@ Class git {
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
 
-		$env[4] = $this->args[0];
+		if (isset($env[4]))
+			$env[4] = $this->args[0];
+		else
+			$env[4] = "\n".$this->args[0];
 		file_put_contents($path_env->get_link(1), implode("", $env));
 		return ("Commit name change success");
 	}
@@ -31,7 +34,7 @@ Class git {
 		$env = file($path_env->get_link(1));
 
 		if (isset($env[4]))
-			return ("Commit name :".$env[4]);
+			return ("Commit name : ".$env[4]);
 		return ("No Commit name set");
 	}
 
