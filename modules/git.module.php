@@ -49,8 +49,10 @@ Class git {
 		if (!file_exists($this->args[0]))
 			return ("The file : ".$this->args[0]." doesn't exist");
 
-		echo shell_exec("cd ".$this->args[0]." && git add .");
-		echo shell_exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
+		echo "push en cours ...<br>";
+
+		shell_exec("cd ".$this->args[0]." && git add .");
+		shell_exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
 		echo shell_exec("cd ".$this->args[0]." && git push");
 
 		return ("ok");
