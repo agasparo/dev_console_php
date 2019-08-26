@@ -15,6 +15,7 @@ extract($_POST);
 
 $js_path = new link('console.php');
 $js_p = $js_path->get_link(0);
+
 ?>
 <script type="text/javascript">
 var link = "<?= $js_p; ?>";

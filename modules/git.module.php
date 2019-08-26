@@ -41,19 +41,19 @@ Class git {
 	private function push() {
 
 		if (!isset($this->args[0]))
-			return ("Usage : git.push [directory]");
+			return ("Usage : git.push [path to directory]");
 
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
 
-		$path_directory = new link($this->args[0]);
-		$dir = file($path_env->get_link(1));
+		if (!file_exists($this->args[0]))
+			return ("The file : ".$this->args[0]." doesn't exist");
 
-		return ($dir);
+		echo shell_exec("cd ".$this->args[0]." && git add .");
+		echo shell_exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'");
+		echo shell_exec("cd ".$this->args[0]." && git push");
 
-		exec("cd ".$dir." && git add .");
-		exec("cd ".$dir." && git commit -m '".$env[4]."'");
-		exec("cd ".$dir." && git push");	
+		return ("ok");
 	}
 
 	public function execute() {
