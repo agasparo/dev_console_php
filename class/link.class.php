@@ -46,9 +46,10 @@ Class link {
 			$i++;
 		}
 		$e1 = array_values($e1);
-		if (is_dir($e1[0]))
+		if (is_dir($e1[0])) {
+			
 			$str = $e[$i - 2]."/".$e[$i - 1];
-		else
+		} else
 			$str = $e[$i - 1];
 		return ($this->actual_url."/".$str."/".implode("/", $e1));
 	}
