@@ -52,17 +52,10 @@ Class git {
 
 		exec("cd ".$this->args[0]." && git add .", $add);
 		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'", $commit);
-		exec("cd ".$this->args[0]." && git push", $res);
+		exec("cd ".$this->args[0]." && git push", $push);
 
-		print_r($add);
-		echo "<br>";
-		print_r($commit);
-		echo "<br>";
+		return (implode("\n", $add).implode("\n", $commit).implode("\n", $push));
 
-		if (empty($res))
-			return ("Push success");
-
-		return ("Error : push failed");
 	}
 
 	public function execute() {
