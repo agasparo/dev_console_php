@@ -3,7 +3,7 @@
 Class git {
 
 	private $comm;
-	private $commandes = ["push", "set_commit_name"];
+	private $commandes = ["push", "set_commit_name", "get_commit_name"];
 	private $args = [];
 
 	public function __Construct($commande, $arguments) {
@@ -25,6 +25,16 @@ Class git {
 		return ("Commit name change success");
 	}
 
+	private function get_commit_name() {
+
+		$path_env = new link('.env');
+		$env = file($path_env->get_link(1));
+
+		if (isset($env[4]))
+			return ("Commit name :".$env[4]);
+		return ("No Commit name set");
+	}
+
 	private function push() {
 
 		if (!isset($this->args[0]))
@@ -35,6 +45,8 @@ Class git {
 
 		$path_directory = new link($this->args[0]);
 		$dir = file($path_env->get_link(1));
+
+		return ($dir);
 
 		exec("cd ".$dir." && git add .");
 		exec("cd ".$dir." && git commit -m '".$env[4]."'");
