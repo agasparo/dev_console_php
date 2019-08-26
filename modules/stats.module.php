@@ -3,7 +3,7 @@
 Class stats {
 
 	private $comm;
-	private $commandes = ["most", "less", "moyenne", "", ""];
+	private $commandes = ["most", "less", "moyenne"];
 	private $args = [];
 
 	public function __Construct($commande, $arguments) {
@@ -14,7 +14,14 @@ Class stats {
 
 	private function check_require() {
 
-
+		$path_re = new link('.env_modules');
+		$data = file($path_re->get_link(1));
+		foreach ($data as $value) {
+			$value = unserialize($value);
+			if (key($value) == "bdd")
+				return (1);
+		}
+		return ("You must have the bdd module to run this module");
 	}
 
 	private function most() {
@@ -29,12 +36,14 @@ Class stats {
 
 	private function moyenne() {
 
-		
+
 	}
 
 	public function execute() {
 
-		return ($this->{$this->comm}());
+		if (($res = $this->check_require()) == 1)
+			return ($this->{$this->comm}());
+		return ($res);
 	}
 }
 
