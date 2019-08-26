@@ -26,7 +26,7 @@ Class stats {
 
 	private function most() {
 
-
+		return ("Usage : stats.most [table] [colum (must be : int)]");
 	}
 
 	private function less() {
