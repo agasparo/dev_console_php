@@ -25,6 +25,11 @@ Class git {
 		return ("Commit name change success");
 	}
 
+	private function push() {
+
+		
+	}
+
 	public function execute() {
 
 		return ($this->{$this->comm}());
