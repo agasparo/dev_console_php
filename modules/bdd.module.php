@@ -36,6 +36,20 @@ Class bdd {
 		}
 	}
 
+	public function execute_req($tab, $req) {
+
+		if (!in_array($this->args[0], $this->tables))
+			return ("Table ".$this->args[0]." doesn't exist ");
+
+		$exec = $this->bdd->query($req);
+		$exec->fetchAll();
+
+		$get_infs = $this->bdd->query('DESCRIBE '.$this->args[0]);
+		$colum = $get_infs->fetchAll();
+		
+		return ($this->create_table($this->get_just_val($colum, 'Field'), $this->get_just_val($exec, ["int"]), 0));
+	}
+
 	private function show_table() {
 
 		return ($this->create_table("Database table(s)", $this->tables, 0));

@@ -26,7 +26,12 @@ Class stats {
 
 	private function most() {
 
-		return ("Usage : stats.most [table] [colum (must be : int)]");
+		if (!isset($this->args[0]) || !isset($args[1]))
+			return ("Usage : stats.most [table] [colum (value of this colum must be : int)]");
+
+		$req = "";
+		$get_bdd = new bdd($this->comm, $this->args);
+		return ($get_bdd->execute_req($this->args[0], $req));
 	}
 
 	private function less() {
