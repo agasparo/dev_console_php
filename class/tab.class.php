@@ -174,7 +174,7 @@ class createtab {
             $output .= $this->border ? $this->getBorderLine() : '';
         }
         if (PHP_SAPI !== 'cli') {
-            $output = '<pre>'.$output.'</pre>';
+            $output = '<pre id="txt_console">'.$output.'</pre>';
         }
         return $output;
     }
