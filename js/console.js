@@ -1,3 +1,10 @@
+if (!window.jQuery) {
+
+	let jq = document.createElement('script');
+	jq.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js';
+	document.head.appendChild(jq);
+}
+
 init();
 
 function init() {
