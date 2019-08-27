@@ -15,7 +15,7 @@ function init() {
 		if (e.which == 13) {
 
 			e.preventDefault();
-			$.post(link, {commande:input_console.value}, function(data) { // chnager url ici
+			$.post(link, {commande:input_console.value}, function(data) {
 				
 				let to_search = "clearing the console";
 				clear = data.match(to_search);
