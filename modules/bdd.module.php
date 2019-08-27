@@ -75,7 +75,7 @@ Class bdd {
 	private function insert() {
 
 		if (!isset($this->args[0]))
-			return ("Usage : bdd.get [table to insert data] [value for each colum (ex : 'arthur, gasparotto, 19 ...') ]");
+			return ("Usage : bdd.insert [table to insert data] [value for each colum (ex : 'arthur, gasparotto, 19 ...') ]");
 
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
@@ -116,7 +116,7 @@ Class bdd {
 	private function update() {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]) || !isset($this->args[2]))
-			return ("Usage : bdd.get [table to insert data] [data to change ex('nom:gasparotto, prenom:arthur')] [condition ex('id:3')]");
+			return ("Usage : bdd.update [table to insert data] [data to change ex('nom:gasparotto, prenom:arthur')] [condition ex('id:3')]");
 
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
@@ -140,7 +140,7 @@ Class bdd {
 	private function delete() {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]))
-			return ("Usage : bdd.get [table to insert data] [condition ex('id:3')]");
+			return ("Usage : bdd.delete [table to insert data] [condition ex('id:3')]");
 
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
