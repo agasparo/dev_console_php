@@ -42,7 +42,7 @@ Class bdd {
 			return ("Table ".$this->args[0]." doesn't exist ");
 
 		$exec = $this->bdd->query($req);
-		$exec->fetchAll();
+		$exec = $exec->fetchAll();
 
 		$get_infs = $this->bdd->query('DESCRIBE '.$this->args[0]);
 		$colum = $get_infs->fetchAll();

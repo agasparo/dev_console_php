@@ -3,7 +3,7 @@
 Class stats {
 
 	private $comm;
-	private $commandes = ["most", "less", "moyenne"];
+	private $commandes = ["most", "less"];
 	private $args = [];
 
 	public function __Construct($commande, $arguments) {
@@ -26,22 +26,22 @@ Class stats {
 
 	private function most() {
 
-		if (!isset($this->args[0]) || !isset($args[1]))
+		if (!isset($this->args[0]) || !isset($this->args[1]))
 			return ("Usage : stats.most [table] [colum (value of this colum must be : int)]");
 
-		$req = "";
+		$req = "SELECT * FROM ".$this->args[0]." ORDER BY ".$this->args[1]." DESC";
 		$get_bdd = new bdd($this->comm, $this->args);
 		return ($get_bdd->execute_req($this->args[0], $req));
 	}
 
 	private function less() {
 
+		if (!isset($this->args[0]) || !isset($this->args[1]))
+			return ("Usage : stats.less [table] [colum (value of this colum must be : int)]");
 
-	}
-
-	private function moyenne() {
-
-
+		$req = "SELECT * FROM ".$this->args[0]." ORDER BY ".$this->args[1]." ASC";
+		$get_bdd = new bdd($this->comm, $this->args);
+		return ($get_bdd->execute_req($this->args[0], $req));
 	}
 
 	public function execute() {
