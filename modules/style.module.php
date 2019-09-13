@@ -2,19 +2,33 @@
 
 Class style {
 
+
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["size", "txt_color", "back_color"];
+
+
 	const max_height = 98;
 	const min_height = 30;
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
 	}
 
-	private function size() {
+	private function size() : String {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]))
 			return ("Usage : style.size [width] [height]");
@@ -31,7 +45,7 @@ Class style {
 		return ("Css update success");
 	}
 
-	private function txt_color() {
+	private function txt_color() : String {
 
 		if (!isset($this->args[0]))
 			return ("Usage : style.txt_color [txt_color]");
@@ -43,7 +57,7 @@ Class style {
 		return ("Css update success");
 	}
 
-	private function back_color() {
+	private function back_color() : String {
 
 		if (!isset($this->args[0]))
 			return ("Usage : style.back_color [back_color]");
@@ -54,7 +68,7 @@ Class style {
 		return ("Css update success");	
 	}
 
-	private function change_css($tab, $elem, $keys) {
+	private function change_css(Array $tab, String $elem, Array $keys) {
 
 		$path_env = new link('css/style.css');
 		$data = str_replace("{", "", file_get_contents($path_env->get_link(1)));
@@ -86,7 +100,7 @@ Class style {
 		file_put_contents($path_env->get_link(1), $data);
 	}
 
-	public function execute() {
+	public function execute() : String {
 
 		return ($this->{$this->comm}());
 	}
