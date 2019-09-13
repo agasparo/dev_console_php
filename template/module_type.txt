@@ -3,11 +3,22 @@
 
 Class module_type {
 
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["commande_1", "commande_2", "..."];
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
@@ -25,7 +36,7 @@ Class module_type {
 
 	[...]
 
-	public function execute() {
+	public function execute() : String {
 
 		return ($this->{$this->comm}());
 	}
