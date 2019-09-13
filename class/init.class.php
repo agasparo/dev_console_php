@@ -2,7 +2,15 @@
 
 Class init {
 
+
+	/**
+	 * @modules Array
+	 */
 	private $modules = [];
+
+	/**
+	 * @nb_modules Int
+	 */
 	private $nb_modules = 0;
 
 	public function __Construct() {
@@ -26,7 +34,7 @@ Class init {
 			$this->load_modules($file);
 	}
 
-	private function load_modules($file) {
+	private function load_modules(String $file) {
 
 		file_put_contents($file, "");
 		$i = 0;
@@ -42,7 +50,7 @@ Class init {
 		$this->readdirectory($path->get_link(1));
 	}
 
-	private function readdirectory($directory) {
+	private function readdirectory(String $directory) {
 
 		$fileList = glob($directory."*.module.php");
 
@@ -61,7 +69,7 @@ Class init {
 		file_put_contents($file, "\n?>", FILE_APPEND);
 	}
 
-	private function infos_module($link_module, $file) {
+	private function infos_module(String $link_module, String $file) : Array {
 
 		$data = [];
 		$cut = explode("/", $link_module);
@@ -71,7 +79,7 @@ Class init {
 		return ($data);
 	}
 
-	private function get_module_commande($link_module) {
+	private function get_module_commande(String $link_module) : Array {
 
 		$cat_file = file($link_module);
 		$i = 0;
