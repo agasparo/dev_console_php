@@ -2,14 +2,32 @@
 
 class console {
 
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = [];
+
+	/**
+	 * @modules Array
+	 */
 	private $modules = [];
 
+	/**
+	 * @html String
+	 */
 	private $html;
+
+	/**
+	 * @res String
+	 */
 	private $res;
+
+	/**
+	 * @var String
+	 */
 	private $var;
 
-	public function __Construct($comm, $anc) {
+	public function __Construct(String $comm, String $anc) {
 
 		$path_html = new link('template/console.html');
 		$html_tem = $path_html->get_link(1);
@@ -64,7 +82,7 @@ class console {
 		echo $this->html;
 	}
 
-	private function replace_text($anc, $comm) {
+	private function replace_text(String $anc, String $comm) {
 
 		if (empty($this->res))
 			$this->html = str_replace("{{infos}}", $this->init, $this->html);
@@ -72,7 +90,7 @@ class console {
 			$this->html = str_replace("{{infos}}", $anc.$comm.$this->res.$this->init, $this->html);
 	}
 
-	private function commande_exist($comm) {
+	private function commande_exist(String $comm) : String {
 
 		$single = explode(" ", $comm);
 		$separe = explode(".", $single[0]);
@@ -101,7 +119,7 @@ class console {
 		return ($exec->execute());
 	}
 
-	private function return_arg($tab) {
+	private function return_arg(Array $tab) : Array {
 
 		$i = 0;
 		$argum = [];
@@ -136,7 +154,7 @@ class console {
 		return ($argum);
 	}
 
-	private function help($type, $other) {
+	private function help(Int $type, Int $other) : String {
 
 		$path = new link('template/help.txt');
 		$file = $path->get_link(1);
@@ -147,7 +165,7 @@ class console {
 		return ($this->create_table($this->commandes[array_search($other, $this->modules)], "Commande(s) available for : ".$other, 1));
 	}
 
-	private function create_table($elem, $header, $type) {
+	private function create_table(Array $elem, $header, Int $type) : String {
 
 		$tbl = new createtab();
 
