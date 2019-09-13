@@ -23,6 +23,7 @@ Class link {
 		$actual_path = getcwd();
 
 		while (!file_exists($actual_path."/dev_console")) {
+			
 			$ex = explode("/", $actual_path);
 			unset($ex[count($ex) - 1]);
 			$actual_path = implode("/", $ex);
