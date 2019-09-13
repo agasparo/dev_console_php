@@ -154,7 +154,7 @@ class console {
 		return ($argum);
 	}
 
-	private function help(Int $type, Int $other) : String {
+	private function help(Int $type, String $other) : String {
 
 		$path = new link('template/help.txt');
 		$file = $path->get_link(1);
