@@ -2,7 +2,6 @@
 
 Class git {
 
-
 	/**
 	 * @comm String
 	 */

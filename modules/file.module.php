@@ -2,8 +2,19 @@
 
 Class file {
 
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["structure", "show"];
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
 
 	public function __Construct($commande, $arguments) {
