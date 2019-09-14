@@ -67,7 +67,7 @@ Class git {
 		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'", $commit);
 		exec("cd ".$this->args[0]." && git push", $push);
 
-		return (implode("\n", $add).implode("\n", $commit).implode("\n", $push)."\n pushing to : ".$this->args[0]);
+		return (implode("\n", $add).implode("\n", $commit).implode("\n", $push));
 
 	}
 
