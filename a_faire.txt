@@ -5,6 +5,6 @@
 - [x] verifier module file + mettre le code au propre
 - [x] verifier module change_header + mettre le code au propre
 - [x] verifier module bdd + mettre le code au propre
-- [] historique des commandes
+- [x] historique des commandes
 - [] auto_completion (js + php)
 - [] pouvoir mettre le script sur un server externe (php, node ...)
