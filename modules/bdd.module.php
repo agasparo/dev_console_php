@@ -2,13 +2,33 @@
 
 Class bdd {
 
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
+
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @bdd Object
+	 */
 	private $bdd;
+
+	/**
+	 * @tables Array
+	 */
 	private $tables = [];
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["insert", "update", "delete", "show_table", "get"];
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
@@ -36,7 +56,7 @@ Class bdd {
 		}
 	}
 
-	public function execute_req($tab, $req) {
+	public function execute_req($tab, $req) : String {
 
 		if (!in_array($this->args[0], $this->tables))
 			return ("Table ".$this->args[0]." doesn't exist ");
@@ -50,12 +70,12 @@ Class bdd {
 		return ($this->create_table($this->get_just_val($colum, 'Field'), $this->get_just_val($exec, ["int"]), 0));
 	}
 
-	private function show_table() {
+	private function show_table() : String {
 
 		return ($this->create_table("Database table(s)", $this->tables, 0));
 	}
 
-	private function get() {
+	private function get() : String {
 
 		if (!isset($this->args[0]))
 			return ("Usage : bdd.get [table to get data]");
@@ -72,7 +92,7 @@ Class bdd {
 		return ($this->create_table($this->get_just_val($colum, 'Field'), $this->get_just_val($tab_infs, ["int"]), 0));
 	}
 
-	private function insert() {
+	private function insert() : String {
 
 		if (!isset($this->args[0]))
 			return ("Usage : bdd.insert [table to insert data] [value for each colum (ex : 'arthur, gasparotto, 19 ...') ]");
@@ -113,7 +133,7 @@ Class bdd {
 		return ("Error : data fill fail (maybe check the type of colum)");
 	}
 
-	private function update() {
+	private function update() : String {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]) || !isset($this->args[2]))
 			return ("Usage : bdd.update [table to insert data] [data to change ex('nom:gasparotto, prenom:arthur')] [condition ex('id:3')]");
@@ -137,7 +157,7 @@ Class bdd {
 
 	}
 
-	private function delete() {
+	private function delete() : String {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]))
 			return ("Usage : bdd.delete [table to insert data] [condition ex('id:3')]");
@@ -175,7 +195,7 @@ Class bdd {
 
 	}
 
-	private function update_bdd($update, $cond) {
+	private function update_bdd($update, $cond) : String {
 
 		$values = [];
 
@@ -232,7 +252,7 @@ Class bdd {
 		return (1);
 	}
 
-	private function get_just_val($tab, $champs) {
+	private function get_just_val($tab, $champs) : Array {
 
 		$i = 0;
 		$col = [];
@@ -253,7 +273,7 @@ Class bdd {
 		return ($col);
 	}
 
-	private function create_table($header, $values, $type) {
+	private function create_table($header, $values, $type) : String {
 
 		$tbl = new createtab();
 
@@ -281,7 +301,7 @@ Class bdd {
 		return ($tbl->getTable());
 	}
 
-	public function execute() {
+	public function execute() : String {
 		
 		return ($this->{$this->comm}());
 	}
