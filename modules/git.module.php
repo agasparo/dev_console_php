@@ -54,13 +54,13 @@ Class git {
 	private function push() : String {
 
 		if (!isset($this->args[0]))
-			return ("Usage : git.push [path to directory] for you maybe : ".$this->link_proj()." (current project )");
+			return ("Usage : git.push [path to directory] for you maybe : ".$this->link_proj()." (current project)");
 
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
 
 		if (!file_exists($this->args[0]))
-			return ("The file : ".$this->args[0]." doesn't exist, you would say : ".$this->link_proj()." ? (current project )");
+			return ("The file : ".$this->args[0]." doesn't exist, you would say : ".$this->link_proj()." ? (current project)");
 
 		exec("cd ".$this->args[0]." && git add .", $add);
 		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'", $commit);
