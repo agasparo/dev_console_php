@@ -17,15 +17,25 @@ Class file {
 	 */
 	private $args = [];
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
 	}
 
-	private function structure() {
+	private function structure() : String {
 
-		exec("ls -R *", $rep);
+		if (!isset($this->args[0]))
+			return ("Usage : file.structure [ path ]");
+
+		if ($this->args[0][strlen($this->args[0]) - 1] != "/")
+			$this->args[0] .= "/";
+
+		$path_file = $this->search_path();
+		if (!file_exists($path_file))
+			return ($path_file);
+
+		exec("ls -R ".$path_file."*", $rep);
 
 		$i = 0;
 		$str = "";
@@ -48,7 +58,27 @@ Class file {
 		return ($str);
 	}
 
-	private function show() {
+	private function search_path() : String {
+
+		$try = 0;
+
+		$actual_path = getcwd().'/'.$this->args[0];
+		while (!file_exists($actual_path)) {
+
+			if ($try > 10)
+				return ("error : Directory can't be found");
+			
+			$ex_path = explode('/', $actual_path);
+			unset($ex_path[4]);
+			$actual_path = implode('/', $ex_path);
+			$try++;
+		}
+
+
+		return ($actual_path);
+	}
+
+	private function show() : String {
 
 		if (!isset($this->args[0]))
 			return ("Usage : file.show [file to read]");
