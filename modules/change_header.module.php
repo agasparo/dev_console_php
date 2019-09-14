@@ -18,13 +18,13 @@ Class change_header {
 	 */
 	private $commandes = ["change"];
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
 	}
 
-	private function change() {
+	private function change() : String {
 
 		if (isset($this->args[0])) {
 
@@ -37,7 +37,7 @@ Class change_header {
 		return ("Usage : change_header.change ['new header']");
 	}
 
-	public function execute() {
+	public function execute() : String {
 
 		return ($this->{$this->comm}());
 	}

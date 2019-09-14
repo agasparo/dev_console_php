@@ -92,7 +92,7 @@ Class file {
 		return ($env);
 	}
 
-	public function execute() {
+	public function execute() : String {
 
 		return ($this->{$this->comm}());
 	}
