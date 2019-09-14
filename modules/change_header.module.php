@@ -30,7 +30,7 @@ Class change_header {
 
 			$path_env = new link('.env');
 			$env = file($path_env->get_link(1));
-			$env[3] = $this->args[0];
+			$env[3] = $this->args[0]."\n";
 			file_put_contents($path_env->get_link(1), implode("", $env));
 			return ("Header change : success (haeder change for the next commandes)");
 		}
