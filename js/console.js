@@ -34,6 +34,15 @@ function init() {
 			nb_f++;	
 		}
 
+		if (e.which == 37) {
+
+			if (nb_f < 0)
+				nb_f = last;
+
+			input_console.value	= localStorage.getItem("commande"+nb_f);
+			nb_f--;	
+		}		
+
 		if (e.which == 13) {
 
 			localStorage.setItem("commande"+w_i, input_console.value);
