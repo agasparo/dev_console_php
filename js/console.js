@@ -6,6 +6,7 @@ if (!window.jQuery) {
 }
 
 var nb_f = 0;
+var w_i = 0;
 
 init();
 
@@ -35,17 +36,8 @@ function init() {
 
 		if (e.which == 13) {
 
-			let i = 0;
-			let comm = "commande"+i;
-
-			for (let key in localStorage) {
-   				if (key == comm) {
-   					i++;
-   					comm = "commande"+i;
-   				}
-			}
-
-			localStorage.setItem(comm, input_console.value);
+			localStorage.setItem("commande"+w_i, input_console.value);
+			w_i++;
 
 			e.preventDefault();
 			$.post(link, {commande:input_console.value}, function(data) {
