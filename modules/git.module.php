@@ -62,9 +62,9 @@ Class git {
 		if (!file_exists($this->args[0]))
 			return ("The file : ".$this->args[0]." doesn't exist, you would say : ".$this->link_proj()." ? ");
 
-		exec("cd ".$this->args[0]." && git add . > /dev/null 2>/dev/null &");
-		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."' > /dev/null 2>/dev/null &");
-		exec("cd ".$this->args[0]." && git push > /dev/null 2>/dev/null &");
+		exec("cd ".$this->args[0]." && git add . > /dev/null &");
+		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."' > /dev/null &");
+		exec("cd ".$this->args[0]." && git push > /dev/null &");
 
 		return ("pushing done");
 
