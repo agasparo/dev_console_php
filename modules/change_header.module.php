@@ -2,8 +2,20 @@
 
 Class change_header {
 
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
+
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["change"];
 
 	public function __Construct($commande, $arguments) {
