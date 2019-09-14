@@ -5,6 +5,8 @@ if (!window.jQuery) {
 	document.head.appendChild(jq);
 }
 
+var nb_f = 0;
+
 init();
 
 function init() {
@@ -12,7 +14,38 @@ function init() {
 	let input_console = document.getElementById('value_console');
 	input_console.onkeydown = function(e) {
 
+		let last = 0;
+		let comms = "commande"+last;
+
+		for (let key in localStorage) {
+   			if (key == comms) {
+   				last++;
+   				comms = "commande"+last;
+   			}
+		}
+
+		if (e.which == 39) {
+
+			if (nb_f > last)
+				nb_f = 0;
+
+			input_console.value	= localStorage.getItem("commande"+nb_f);
+			nb_f++;	
+		}
+
 		if (e.which == 13) {
+
+			let i = 0;
+			let comm = "commande"+i;
+
+			for (let key in localStorage) {
+   				if (key == comm) {
+   					i++;
+   					comm = "commande"+i;
+   				}
+			}
+
+			localStorage.setItem(comm, input_console.value);
 
 			e.preventDefault();
 			$.post(link, {commande:input_console.value}, function(data) {
