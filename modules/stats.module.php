@@ -2,11 +2,22 @@
 
 Class stats {
 
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["most", "less"];
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
@@ -24,7 +35,7 @@ Class stats {
 		return ("You must have the bdd module to run this module");
 	}
 
-	private function most() {
+	private function most() : String {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]))
 			return ("Usage : stats.most [table] [colum (value of this colum must be : int)]");
@@ -34,7 +45,7 @@ Class stats {
 		return ($get_bdd->execute_req($this->args[0], $req));
 	}
 
-	private function less() {
+	private function less() : String {
 
 		if (!isset($this->args[0]) || !isset($this->args[1]))
 			return ("Usage : stats.less [table] [colum (value of this colum must be : int)]");
@@ -44,7 +55,7 @@ Class stats {
 		return ($get_bdd->execute_req($this->args[0], $req));
 	}
 
-	public function execute() {
+	public function execute() : String {
 
 		if (($res = $this->check_require()) == 1)
 			return ($this->{$this->comm}());

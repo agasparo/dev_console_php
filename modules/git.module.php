@@ -2,17 +2,29 @@
 
 Class git {
 
+
+	/**
+	 * @comm String
+	 */
 	private $comm;
+
+	/**
+	 * @commandes Array
+	 */
 	private $commandes = ["push", "set_commit_name", "get_commit_name"];
+
+	/**
+	 * @args Array
+	 */
 	private $args = [];
 
-	public function __Construct($commande, $arguments) {
+	public function __Construct(String $commande, Array $arguments) {
 
 		$this->args = $arguments;
 		$this->comm = $commande;
 	}
 
-	private function set_commit_name() {
+	private function set_commit_name() : String {
 
 		if (!isset($this->args[0]))
 			return ("Usage : git.set_commit_name ['new name']");
@@ -29,7 +41,7 @@ Class git {
 		return ("Commit name change success");
 	}
 
-	private function get_commit_name() {
+	private function get_commit_name() : String {
 
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
@@ -40,16 +52,16 @@ Class git {
 		return ("No Commit name set");
 	}
 
-	private function push() {
+	private function push() : String {
 
 		if (!isset($this->args[0]))
-			return ("Usage : git.push [path to directory]");
+			return ("Usage : git.push [path to directory] for you maybe : ".$this->link_proj());
 
 		$path_env = new link('.env');
 		$env = file($path_env->get_link(1));
 
 		if (!file_exists($this->args[0]))
-			return ("The file : ".$this->args[0]." doesn't exist");
+			return ("The file : ".$this->args[0]." doesn't exist, you would say : ".$this->link_proj()." ? ");
 
 		exec("cd ".$this->args[0]." && git add .", $add);
 		exec("cd ".$this->args[0]." && git commit -m '".$env[4]."'", $commit);
@@ -59,7 +71,13 @@ Class git {
 
 	}
 
-	public function execute() {
+	private function link_proj() : String {
+
+		$serv = explode("/", str_replace($_SERVER['HTTP_ORIGIN'], '', $_SERVER['HTTP_REFERER']));
+		return ($_SERVER['DOCUMENT_ROOT']."/".$serv[1]);
+	}
+
+	public function execute() : String {
 
 		return ($this->{$this->comm}());
 	}

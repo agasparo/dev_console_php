@@ -1,6 +1,6 @@
-- [] verifier module style
-- [] verifier module stats + mettre le code au propre
-- [] verifier module http_request + mettre le code au propre
+- [x] verifier module style
+- [x] verifier module stats + mettre le code au propre
+- [x] verifier module http_request + mettre le code au propre
 - [] verifier module git + mettre le code au propre
 - [] verifier module file + mettre le code au propre
 - [] verifier module change_header + mettre le code au propre
