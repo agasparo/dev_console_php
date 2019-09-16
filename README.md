@@ -9,6 +9,8 @@ To get usage of a module : module_name.
 
 Modules descriptions:
 
+![Alt text](/img/mod_screen.png?raw=true "Optional Title")
+
 HEADER :
 
 ![Alt text](/img/header_screen.png?raw=true "Optional Title")
