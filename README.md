@@ -7,7 +7,7 @@ To use module commande do : {module}.{command} [arguments ...]
 
 To get usage of a module : module_name.
 
-Modules description:
+Modules descriptions:
 
 BDD : 
 
