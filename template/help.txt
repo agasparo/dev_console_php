@@ -3,4 +3,4 @@ To reload all modules do : system.reload_modules
 To use module commande do : {module}.{commande} [args ...]
 To add module juste put the module file in the directory modules
 The file name must be like : name.module.php
-For more informations got to : <a href="https://github.com/psyko31/dev_console" target="_blanck" style="color: orange;">Project Page</a>
+For more informations got to : <a href="https://github.com/agasparo/dev_console" target="_blanck" style="color: orange;">Project Page</a>

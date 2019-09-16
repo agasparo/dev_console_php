@@ -1,5 +1,5 @@
 // if file name is module_type.module.php
-// the classname mus be like : module_type
+// the classname must be like : module_type
 
 Class module_type {
 
