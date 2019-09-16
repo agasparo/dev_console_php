@@ -5,9 +5,12 @@ To reload all modules do : system.reload_modules
 
 To use module commande do : {module}.{command} [arguments ...]
 
+To get usage of a module : module_name.
 Modules description:
 
-BDD module
+BDD module:
+![Alt text](/img/bdd_screen.png?raw=true "Optional Title")
+
 
 
 
