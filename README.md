@@ -15,6 +15,9 @@ HEADER :
 
 ![Alt text](/img/header_screen.png?raw=true "Optional Title")
 
+allow to change the name of the header
+ex: change_headet.change lpelissi
+
 STYLE :
 
 ![Alt text](/img/style_screen.png?raw=true "Optional Title")
