@@ -21,7 +21,7 @@ STYLE :
 
 ![Alt text](/img/style_screen.png?raw=true "Optional Title")
 
-Change the size of the console in % *//* height_mini = 31 height_maxi = 97	*//*	ex: style.size 'width' 'height'   (values must be int)
+Change the size of the console in % *//* height between 30 && 97  *//*	ex: style.size 'width' 'height'   
 
 Change the color of the text *//* ex: style.txt_color 'color' 
 
