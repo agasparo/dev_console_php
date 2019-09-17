@@ -15,13 +15,15 @@ HEADER :
 
 ![Alt text](/img/header_screen.png?raw=true "Optional Title")
 
-allow to change the name of the header '\n'
-ex: change_headet.change lpelissi
+Change the name of the console header 		ex: change_headet.change lpelissi
 
 STYLE :
 
 ![Alt text](/img/style_screen.png?raw=true "Optional Title")
 
+Change the size of the console in % ; height_mini = 30 height_maxi = 97		ex: style.size 100 200
+change the color of the text
+change the console background color
 
 STATS :
 
